@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<context>
+	<Resource name="jdbc/DB_sem"
+            auth="Container"
+            type="javax.sql.DataSource"
+            driverClassName="com.mysql.jdbc.Driver"
+            factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" 
+            username="semtle"
+            password="Semtle0420!"
+            url="jdbc:mysql://54.159.140.253:3306/DB_sem?useSSL=false"
+            maxWait="5000" 
+	/>
+</context> 
+

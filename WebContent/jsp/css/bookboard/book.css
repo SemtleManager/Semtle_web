@@ -1,0 +1,85 @@
+.bookboard {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.book-head {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: var(--border);
+  margin-bottom: 30px;
+  margin-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 15px;
+}
+
+.book-head input {
+  width: 180px;
+  font-size: 13px;
+  padding: 5px;
+  background-color: var(--purple);
+  border-radius: 25px;
+  text-align: center;
+  margin-right: 5px;
+}
+
+.bookboard .bookboard-box {
+  width: 85%;
+  height: 150px;
+  border-radius: 15px;
+  padding: 0 25px;
+  padding-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookboard .slide {
+  width: 120px;
+  height: 140px;
+  box-shadow: var(--box-shadow);
+}
+
+.bookboard .slide .image {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.bookboard .slide .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.bookboard .slide .content {
+  display: none;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.bookboard .slide .content_info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.bookboard .slide .content h3 {
+  font-size: 2.5rem;
+  color: var(--black);
+}
+
+.bookboard .slide .content h2 {
+  font-size: 2rem;
+  color: var(--black);
+}

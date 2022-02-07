@@ -1,0 +1,88 @@
+.studyroom {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.studyroom-head {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: var(--border);
+  margin-bottom: 30px;
+  margin-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+}
+
+.studyroom-head span {
+  font-size: 13px;
+  padding: 5px 10px;
+  background-color: var(--purple);
+  border-radius: 25px;
+}
+
+.studyroom-top {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  padding: 0 25px;
+  margin-top: 40px;
+}
+
+.studyroom .studyroom-box {
+  width: 160px;
+  height: 220px;
+  background-color: var(--white);
+  border-radius: 15px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.study-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.study-content-head {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 13px;
+}
+
+.study-content-head img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.study-content-main {
+  width: 100%;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: var(--border);
+  padding: 15px 0;
+  background-color: var(--color-hover);
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}

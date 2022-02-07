@@ -1,0 +1,46 @@
+.join {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 50px;
+}
+
+.joinform {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.join table {
+  font-size: 16px;
+  border-collapse: separate;
+  border-spacing: 8px;
+}
+
+.join table tr,
+.join table td {
+  width: 100%;
+  height: 40px;
+}
+
+.join table .inputbox input,
+.join table .inputbox select {
+  background-color: var(--color-hover);
+  border-radius: 5px;
+  font-size: 16px;
+  width: 180px;
+}
+
+.join_btn {
+  position: fixed;
+  top: 505px;
+  font-size: 17px;
+  padding: 15px 20px;
+  border-radius: 20px;
+  background-color: var(--purple);
+  color: var(--color-text);
+}

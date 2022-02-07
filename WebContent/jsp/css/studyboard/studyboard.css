@@ -1,0 +1,17 @@
+.studyboard-foot {
+  padding: 0 20px;
+}
+
+.studyboard-foot-etc {
+  font-size: 16px;
+}
+
+#studyboard-foot-attach {
+  font-size: 12px;
+  border: none;
+  background-color: none;
+}
+
+.board_append input {
+  font-size: 16px;
+}

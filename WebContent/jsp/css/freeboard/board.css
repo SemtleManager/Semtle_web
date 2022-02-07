@@ -1,0 +1,141 @@
+.talkboard {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+
+.talkboard-head {
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  border-bottom: var(--border);
+  margin-bottom: 30px;
+  margin-top: 20px;
+  padding: 0 25px;
+  padding-bottom: 10px;
+}
+
+.talkboard-head_write {
+  font-size: 13px;
+  padding: 5px 10px;
+  background-color: var(--purple);
+  border-radius: 25px;
+}
+
+.talkboard .talkboard-box {
+  width: 85%;
+  height: auto;
+  padding: 15px;
+  background-color: var(--white);
+  margin-bottom: 20px;
+  border: var(--border);
+  border-radius: 15px;
+}
+
+.talk-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.talk-content-head {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.talk-content-head img {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+
+.talk-content-head2 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.talk-content-head2 span:last-child {
+  font-size: 10px;
+  opacity: 80%;
+}
+
+.talk-content-main {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  font-size: 12px;
+}
+
+.talk-content-foot {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  opacity: 80%;
+}
+
+.talk-content-foot-writer span {
+  margin-right: 5px;
+}
+
+.talk-content-foot-etc {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.talk-content-foot-etc span {
+  padding: 4px 8px;
+  border: var(--border);
+  border-radius: 25px;
+  background-color: var(--light-gray);
+}
+
+.talk-content-foot-etc .talk-comment {
+  margin-left: 10px;
+}
+
+.talk-content-comment {
+  width: 100%;
+  display: none;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px 15px;
+  background-color: var(--light-gray);
+  border-radius: 10px;
+}
+
+.talk-content-comment.active {
+  display: flex;
+}
+
+.talk-content-commentbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.talk-content-commentbox:last-child {
+  margin-bottom: 0;
+}

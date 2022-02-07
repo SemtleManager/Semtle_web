@@ -1,0 +1,74 @@
+header {
+  height: 55px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  z-index: 1000;
+}
+
+header .navbar a {
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 10px 14px;
+  color: var(--color-text);
+  display: flex;
+}
+
+header .navbar a:hover {
+  background-color: var(--purple);
+  color: var(--color-hover);
+}
+
+header .icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-right: 10px;
+}
+
+header .icons {
+  display: none;
+}
+
+header .icons #sm-login {
+  margin-left: -50px;
+  font-size: 20px;
+}
+
+header .icons #home-bar {
+  margin-left: -50px;
+  font-size: 20px;
+}
+
+header .icons #join-home {
+  font-size: 20px;
+}
+header #header-before {
+  color: var(--color-text);
+  font-size: 22px;
+}
+
+header .header-menu {
+  position: fixed;
+  font-size: 20px;
+  color: var(--color-text);
+}
+
+header #header-name {
+  font-size: 20px;
+  font-family: "KOTRAHOPE";
+}
+
+header .header-title {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
