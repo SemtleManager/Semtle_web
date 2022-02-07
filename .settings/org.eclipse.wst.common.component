@@ -2,9 +2,6 @@
     <wb-module deploy-name="Semtle_Web">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <dependent-module archiveName="mysql-connector-java-5.1.39.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mysql-connector-java-5.1.39/mysql-connector-java-5.1.39">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="Semtle_Web"/>
         <property name="java-output-path" value="/Semtle_Web/build/classes"/>
     </wb-module>

@@ -13,7 +13,7 @@
 	
 	if(userId != null)
 		user = instance.selectInfo(userId);
-	
+	 
 %> 
 
 <!DOCTYPE html>
