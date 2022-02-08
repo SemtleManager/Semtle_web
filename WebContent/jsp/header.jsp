@@ -2,10 +2,9 @@
     pageEncoding="UTF-8"%>
 <%
 
-	String title = request.getParameter("title");;
-
-	
-
+   String userId = (String) session.getAttribute("userId");
+   String title = request.getParameter("title");
+   
 %>
 
 
@@ -25,8 +24,8 @@
   </head>
 <body>
 <%
-	
-	if(title == null) {	
+   
+   if(title == null) {   
 %>
    <header>
    <a href=""></a>
@@ -40,11 +39,20 @@
    </nav>
    
    <div class="icons">
+ <%
+       if(userId == null) {
+ %>
         <a href="${pageContext.request.contextPath}/jsp/User/login.jsp?title=로그인"><i class="fas fa-user" id="sm-login"></i></a>
+<% }else {
+%>
+      <a href="${pageContext.request.contextPath}/jsp/User/info.jsp?title=정보수정"><i class="fas fa-user" id="sm-login"></i></a>
+<%         
+}
+ %>
         <i class="fas fa-bars header-menu" id="menu-bars"></i>
       </div>
 <%}else { %>
-	<header>
+   <header>
     <a href=""></a>
 
     <nav class="navbar">
@@ -70,7 +78,7 @@
     <span id="header-name"><%=title %></span>
     
    
-  	<div class="icons">
+     <div class="icons">
       <a href="${pageContext.request.contextPath}/jsp/index.jsp"><i class="fas fa-home" id="home-bar"></i></a>
       <i class="fas fa-bars header-menu" id="menu-bars"></i> 
     </div>

@@ -3,125 +3,78 @@
 <%@ page import = "java.sql.Timestamp" %>
 <%@ page import = "java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="com.User.*"%>
+<%@ page import="com.Post.*"%>
 
 <% request.setCharacterEncoding("utf-8");%> 
-<jsp:useBean id="article" class="com.User.userDTO">
+<jsp:useBean id="article" class="com.Post.postDTO">
 	<jsp:setProperty name="article" property="*" />
 </jsp:useBean>
 
 <%
 
+	int postId = 0;
+	String boardId = request.getParameter("boardId");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm:ss");
 	String type = request.getParameter("type");
 	System.out.println("type = " + type);
 	String id = request.getParameter("id");
 	String passwd  = request.getParameter("passwd");
 	
-	userDAO user = userDAO.getInstance();
+	postDAO post = postDAO.getInstance();
 	
-	if(type.equals("confirmId")) {
+	//글쓰기
+	if(type.equals("posting")) {
 		
-		if(user.confirmId(id)==1){
-			
-			session.setAttribute("id",id);//id가져옴
-			
-			session.setMaxInactiveInterval(60*10*60*60);
-			
-			//response.sendRedirect("../index.jsp");
-			
-			System.out.println("findID 성공");
-			
-%>			
-			<script>
-				alert("이미 사용중인 아이디입니다.");
-				history.go(-1);
-			</script>
-<%			
-		}else{%>
-	    <script> 
-		  alert("사용 가능한 아이디입니다.");
-		  history.go(-1);
-		</script>
-	<%
-		}
-	}else if(type.equals("login")) {
-		if(user.login(id, passwd)==1){
-			
-			session.setAttribute("id",id);//id가져옴
-			
-			session.setMaxInactiveInterval(60*10*60*60);
-			
-			//response.sendRedirect("../index.jsp");
-			
-			System.out.println("login 성공");
-		}else{%>
-	    <script> 
-		  alert("아이디 또는 비밀번호가 맞지 않습니다.");
-		  history.go(-1);
-		</script>
-<%
-		}
-	}else if(type.equals("signup")) {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		article.setCreateAt(sdf.format(new Timestamp(System.currentTimeMillis())));
-		article.setUpdateAt(sdf.format(new Timestamp(System.currentTimeMillis())));
-
-		user.signUp(article);
+		article.setCreateAt(sdf.format(new Timestamp(System.currentTimeMillis())).toString());
+		article.setUpdateAt(sdf.format(new Timestamp(System.currentTimeMillis())).toString());
+		article.setBoardId(boardId);
+		post.writePost(article);
 %>
-	    <script> 
-		  alert("셈틀회원이 되신걸 축하합니다~~");
-		  history.go(-1);
+		<script>
+			alert("게시물을 작성하였습니다.");
+			location.href = "${pageContext.request.contextPath}/jsp/Board/board.jsp?title=자유게시판";
 		</script>
-<%
-	}else if(type.equals("updateInfo")) {
-		
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			article.setCreateAt(sdf.format(new Timestamp(System.currentTimeMillis())));
-			article.setUpdateAt(sdf.format(new Timestamp(System.currentTimeMillis())));
 
-			if(user.updateInfo(article) == 1) {
+<%
+	}else if(type.equals("updatePost")) {
+		
+		postId = Integer.parseInt(request.getParameter("postId"));
+		article.setUpdateAt(sdf.format(new Timestamp(System.currentTimeMillis())).toString());
+		if(post.updatePost(article, postId) == 1) {
+%>		
+		<script>
+			alert("게시물이 수정되었습니다.");
+			location.href = "${pageContext.request.contextPath}/jsp/Board/board.jsp?postId=<%=postId%>";
+		</script>	
+<%
+		}else {
 %>
-				<script> 
-					alert("정보가 변경되었습니다.");
-					history.go(-1);
-				</script>
-				
+		<script>
+			alert("수정에 실패했습니다.");	
+			history.go(-1);
+		</script>		
 <%			
+		}
+	} else if(type.equals("deletePost")) {
+%>
+		postId = Integer.parseInt(request.getParameter("postId"));
+		<script>
+			var bool = confirm("정말로 삭제하시겠습니까?");
+			if(bool) {
+
+				<%post.deletePost(postId);%>
+				alert("성공적으로 삭제되었습니다.");
+				location.href = "${pageContext.request.contextPath}/jsp/Board/board.jsp";
 			}else {
-%>				
-				<script> 
-				  alert("양식에 맞게 작성해주시기 바랍니다.");
-				  history.go(-1);
-				</script>
-<%		
-			}
-			
-		}else if(type.equals("findUserId")) {
-			String userName = request.getParameter("userName");
-			String grade = request.getParameter("grade");
-			String userCode = request.getParameter("userCode");
-			
-			String userId = user.findUserId(userName, grade, userCode);
-			
-%>			
-			<script>
-				alert("회원님의 아이디는 < <%=userId%> > 입니다.");
 				history.go(-1);
-			</script>
-<%			
-		}else if(type.equals("changePasswd")) {
-			if(user.changePassword(id, passwd) == 1) {
-%>
-				<script>
-					alert("비밀번호가 변경되었습니다.");
-					history.go(-1);
-				</script>
-<%				
 			}
-			
-		}
-%>
-
+		</script>
 	
+<%		
+	}
+
+%>			
+	
+
 	

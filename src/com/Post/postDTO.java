@@ -7,6 +7,7 @@ public class postDTO {
 	private String userId;
 	private String content;
 	private String fileUrl;
+	private int lookUp;
 	private String createAt;
 	private String updateAt;
 	private String status;
@@ -35,6 +36,12 @@ public class postDTO {
 	}
 	public String getUpdateAt() {
 		return updateAt;
+	}
+	public int getLookUp() {
+		return lookUp;
+	}
+	public void setLookUp(int lookUp) {
+		this.lookUp = lookUp;
 	}
 	public String getStatus() {
 		return status;

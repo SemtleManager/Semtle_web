@@ -8,14 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemtleWeb</title>
-    <script>
-      function getloginkeepCheckboxValue(event) {
-        let login_result = "";
-        if (event.target.checked) {
-          login_result = event.target.value;
-        }
-      }
-    </script>
+
   </head>
 
   <body>

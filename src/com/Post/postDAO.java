@@ -39,7 +39,8 @@ public class postDAO {
 					"`title`," + 
 					"`userId`," + 
 					"`content`," + 
-					"`fileUrl`," + 
+					"`fileUrl`," +
+					"`lookUp`," + 
 					"`createAt`," + 
 					"`updateAt`," + 
 					"`status`" +
@@ -48,6 +49,7 @@ public class postDAO {
 				"(" +
 					"?," + 
 					"?," + 
+					"?," +
 					"?," + 
 					"?," + 
 					"?," + 
@@ -64,9 +66,10 @@ public class postDAO {
 			pstmt.setString(3,  article.getUserId());
 			pstmt.setString(4,  article.getContent());
 			pstmt.setString(5, article.getFileUrl());
-			pstmt.setString(6,  article.getCreateAt());
-			pstmt.setString(7,  article.getUpdateAt());
-			pstmt.setString(8,  article.getStatus());
+			pstmt.setInt(6, article.getLookUp());
+			pstmt.setString(7,  article.getCreateAt());
+			pstmt.setString(8,  article.getUpdateAt());
+			pstmt.setString(9,  article.getStatus());
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -111,11 +114,12 @@ public class postDAO {
 					"`Post`.`title`," + 
 					"`Post`.`userId`," + 
 					"`Post`.`content`," + 
-					"`Post`.`fileUrl`," + 
+					"`Post`.`fileUrl`," +
+					"`Post`.`lookUp`," + 
 					"`Post`.`createAt`," + 
 					"`Post`.`updateAt`," + 
 					"`Post`.`status`" + 
-				"FROM `DB_sem`.`Post` where boardId = ? order by reg_date desc limit ?,?";
+				"FROM `DB_sem`.`Post` where boardId = ? order by createAt desc limit ?,?";
 		
 		try {
 			conn = db.getConnection();
@@ -136,6 +140,7 @@ public class postDAO {
 					post.setUserId(rs.getString("userId"));
 					post.setContent(rs.getString("content"));
 					post.setFileUrl(rs.getString("fileUrl"));
+					post.setLookUp(rs.getInt("lookUp"));
 					post.setCreateAt(rs.getString("createAt"));
 					post.setUpdateAt(rs.getString("updateAt"));
 					post.setStatus(rs.getString("status"));
@@ -154,17 +159,18 @@ public class postDAO {
 		return postlists;
 	}
 	
-	public postDTO readPost(int boardId) {
+	public postDTO readPost(int postId) {
 		postDTO post = null;
 		String update_query = 
-				"update post set lookUp = lookUp + 1 where boardId = ?";
+				"update post set lookUp = lookUp + 1 where postId = ?";
 		String select_query = 
 				"SELECT `Post`.`postId`," + 
 					"`Post`.`boardId`," + 
 					"`Post`.`title`," + 
 					"`Post`.`userId`," + 
 					"`Post`.`content`," + 
-					"`Post`.`fileUrl`," + 
+					"`Post`.`fileUrl`," +
+					"`Post`.`lookUp`," + 
 					"`Post`.`createAt`," + 
 					"`Post`.`updateAt`," + 
 					"`Post`.`status`" + 
@@ -172,11 +178,11 @@ public class postDAO {
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(update_query);
-			pstmt.setInt(1,  boardId);
+			pstmt.setInt(1,  postId);
 			pstmt.executeUpdate();
 			
 			pstmt = conn.prepareStatement(select_query);
-			pstmt.setInt(1,  boardId);
+			pstmt.setInt(1,  postId);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -187,6 +193,7 @@ public class postDAO {
 				post.setUserId(rs.getString("userId"));
 				post.setContent(rs.getString("content"));
 				post.setFileUrl(rs.getString("fileUrl"));
+				post.setLookUp(rs.getInt("lookUp"));
 				post.setCreateAt(rs.getString("createAt"));
 				post.setUpdateAt(rs.getString("updateAt"));
 			}

@@ -73,7 +73,7 @@
 %>
 	    <script> 
 		  alert("셈틀회원이 되신걸 축하합니다~~");
-		  location.href = "../jsp/index.jsp";
+		  location.href = "${pageContext.request.contextPath}/jsp/index.jsp";
 		</script>
 <%
 	}else if(type.equals("updateInfo")) {
