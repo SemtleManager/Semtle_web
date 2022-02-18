@@ -3,7 +3,9 @@ package com.Post;
 public class postDTO {
 	private int postId;
 	private String boardId;
-	private String title;
+	private String p_title;
+	private String userRole;
+	private String nickName;
 	private String userId;
 	private String content;
 	private String fileUrl;
@@ -19,8 +21,8 @@ public class postDTO {
 	public String getBoardId() {
 		return boardId;
 	}
-	public String getTitle() {
-		return title;
+	public String getP_title() {
+		return p_title;
 	}
 	public String getUserId() {
 		return userId;
@@ -52,8 +54,8 @@ public class postDTO {
 	public void setBoardId(String boardId) {
 		this.boardId = boardId;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setP_title(String p_title) {
+		this.p_title = p_title;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -72,6 +74,18 @@ public class postDTO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getUserRole() {
+		return userRole;
+	}
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 	
 	

@@ -32,7 +32,7 @@ public class userDAO {
 	private userDAO() { }
 	
 	//회원가입 메소드
-	public void signUp(userDTO article) {
+	public void signUp(int grade, String nickName, int userCode, String userName, String userId, String userPassword, String userEmail, String userPhone, String userRole, String createAt, String updateAt, String status) {
 		String query = 
 				"INSERT INTO `DB_sem`.`User`" + 
 				"(" + 
@@ -68,18 +68,18 @@ public class userDAO {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1,  article.getGrade());
-			pstmt.setString(2, article.getNickName());
-			pstmt.setInt(3,  article.getUserCode());
-			pstmt.setString(4,  article.getUserName());
-			pstmt.setString(5,  article.getUserId());
-			pstmt.setString(6,  article.getUserPassword());
-			pstmt.setString(7,  article.getUserEmail());
-			pstmt.setString(8,  article.getUserPhone());
-			pstmt.setString(9,  article.getUserRole());
-			pstmt.setString(10,  article.getCreateAt());
-			pstmt.setString(11,  article.getUpdateAt());
-			pstmt.setString(12,  article.getStatus());
+			pstmt.setInt(1,  grade);
+			pstmt.setString(2, nickName);
+			pstmt.setInt(3,  userCode);
+			pstmt.setString(4,  userName);
+			pstmt.setString(5,  userId);
+			pstmt.setString(6,  userPassword);
+			pstmt.setString(7,  userEmail);
+			pstmt.setString(8,  userPhone);
+			pstmt.setString(9,  userRole);
+			pstmt.setString(10,  createAt);
+			pstmt.setString(11,  updateAt);
+			pstmt.setString(12,  status);
 			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -121,16 +121,17 @@ public class userDAO {
 	}
 	
 	//정보 조회
-	public userDTO selectInfo(String userId) {
+	public userDTO selectInfo(String userId, String userPassword) {
 		userDTO user = null;
 		String query = 
-				"select * from User where userId = ?";
+				"select * from User where userId = ? and userPassword = ?";
 		
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setString(1, userId);
+			pstmt.setString(2, userPassword);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -159,7 +160,7 @@ public class userDAO {
 	}
 	
 	//정보 변경
-	public int updateInfo(userDTO user) {
+	public int updateInfo(int grade, String nickName, int userCode, String userName, String userEmail, String userPhone, String status, String updateAt, String userId) {
 		int x = -1;
 		String query = 
 				"UPDATE `DB_sem`.`User`" + 
@@ -177,15 +178,15 @@ public class userDAO {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setInt(1,  user.getGrade());
-			pstmt.setString(2, user.getNickName());
-			pstmt.setInt(3,  user.getUserCode());
-			pstmt.setString(4,  user.getUserName());
-			pstmt.setString(5,  user.getUserEmail());
-			pstmt.setString(6,  user.getUserPhone());
-			pstmt.setString(7,  user.getStatus());
-			pstmt.setString(8,  user.getUpdateAt());
-			pstmt.setString(9,  user.getUserId());
+			pstmt.setInt(1,  grade);
+			pstmt.setString(2, nickName);
+			pstmt.setInt(3,  userCode);
+			pstmt.setString(4,  userName);
+			pstmt.setString(5,  userEmail);
+			pstmt.setString(6,  userPhone);
+			pstmt.setString(7,  status);
+			pstmt.setString(8,  updateAt);
+			pstmt.setString(9,  userId);
 			
 			pstmt.executeUpdate();
 			x = 1;
@@ -251,7 +252,7 @@ public class userDAO {
 	}
 	
 	//아이디 찾기
-	public String findUserId(String userName, String grade, String userCode) {
+	public String findUserId(String userName, int grade, int userCode) {
 		String id = "";
 		String query = 
 				"select userId from User where userName = ? and grade = ? and userCode = ?";
@@ -260,8 +261,8 @@ public class userDAO {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userName);
-			pstmt.setString(2, grade);
-			pstmt.setString(3,  userCode);
+			pstmt.setInt(2, grade);
+			pstmt.setInt(3,  userCode);
 			
 			rs = pstmt.executeQuery();
 			
@@ -339,6 +340,7 @@ public class userDAO {
 					article.setGrade(rs.getInt("grade"));
 					article.setNickName(rs.getString("nickName"));
 					article.setUserName(rs.getString("userName"));
+					article.setUserCode(rs.getInt("userCode"));
 					article.setUserId(rs.getString("userId"));
 					article.setUserPassword(rs.getString("userPassword"));
 					article.setUserEmail(rs.getString("userEmail"));

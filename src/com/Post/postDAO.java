@@ -31,12 +31,14 @@ public class postDAO {
 	//private 로 기본 생성자 차단
 	private postDAO() { }
 	
-	public void writePost(postDTO article) {
+	public void writePost(String boardId, String p_title, String userRole, String nickName, String userId, String content, String fileUrl, int lookUp, String createAt, String updateAt, String status) {
 		String query = 
 				"INSERT INTO `DB_sem`.`Post`" + 
 				"(" +
 					"`boardId`," + 
-					"`title`," + 
+					"`p_title`," +
+					"`userRole`," +
+					"`nickName`," + 
 					"`userId`," + 
 					"`content`," + 
 					"`fileUrl`," +
@@ -48,7 +50,9 @@ public class postDAO {
 				"VALUES" + 
 				"(" +
 					"?," + 
+					"?," +
 					"?," + 
+					"?," +
 					"?," +
 					"?," + 
 					"?," + 
@@ -61,15 +65,17 @@ public class postDAO {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, article.getBoardId());
-			pstmt.setString(2, article.getTitle());
-			pstmt.setString(3,  article.getUserId());
-			pstmt.setString(4,  article.getContent());
-			pstmt.setString(5, article.getFileUrl());
-			pstmt.setInt(6, article.getLookUp());
-			pstmt.setString(7,  article.getCreateAt());
-			pstmt.setString(8,  article.getUpdateAt());
-			pstmt.setString(9,  article.getStatus());
+			pstmt.setString(1, boardId);
+			pstmt.setString(2, p_title);
+			pstmt.setString(3,  userRole);
+			pstmt.setString(4, nickName);
+			pstmt.setString(5,  userId);
+			pstmt.setString(6,  content);
+			pstmt.setString(7, fileUrl);
+			pstmt.setInt(8, lookUp);
+			pstmt.setString(9,  createAt);
+			pstmt.setString(10,  updateAt);
+			pstmt.setString(11,  status);
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -84,11 +90,11 @@ public class postDAO {
 	public int getPostCount(String boardId) {
 		int x = 0;
 		String query = 
-				"select count(*) from Post";
+				"select count(*) from Post where boardId = ?";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
-			
+			pstmt.setString(1, boardId);
 			rs = pstmt.executeQuery();
 			if(rs.next()) 
 				x = rs.getInt(1);
@@ -111,7 +117,9 @@ public class postDAO {
 				"SELECT " + 
 					"`Post`.`postId`," + 
 					"`Post`.`boardId`," + 
-					"`Post`.`title`," + 
+					"`Post`.`p_title`," +
+					"`Post`.`userRole`," +
+					"`Post`.`nickName`," + 
 					"`Post`.`userId`," + 
 					"`Post`.`content`," + 
 					"`Post`.`fileUrl`," +
@@ -136,7 +144,9 @@ public class postDAO {
 					postDTO post = new postDTO();
 					post.setPostId(rs.getInt("postId"));
 					post.setBoardId(rs.getString("boardId"));
-					post.setTitle(rs.getString("title"));
+					post.setP_title(rs.getString("p_title"));
+					post.setUserRole(rs.getString("userRole"));
+					post.setNickName(rs.getString("nickName"));
 					post.setUserId(rs.getString("userId"));
 					post.setContent(rs.getString("content"));
 					post.setFileUrl(rs.getString("fileUrl"));
@@ -159,14 +169,53 @@ public class postDAO {
 		return postlists;
 	}
 	
+	public postDTO viewPost(int postId) {
+		postDTO post = null;
+		String query = 
+				"select * from Post where postId = ?";
+		
+		try {
+			conn = db.getConnection();
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, postId);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				post = new postDTO();
+				post.setPostId(rs.getInt("postId"));
+				post.setBoardId(rs.getString("boardId"));
+				post.setP_title(rs.getString("p_title"));
+				post.setUserRole(rs.getString("userRole"));
+				post.setNickName(rs.getString("nickName"));
+				post.setUserId(rs.getString("userId"));
+				post.setContent(rs.getString("content"));
+				post.setFileUrl(rs.getString("fileUrl"));
+				post.setCreateAt(rs.getString("createAt"));
+				post.setUpdateAt(rs.getString("updateAt"));
+				post.setStatus(rs.getString("status"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(rs != null) try {rs.close();}catch(SQLException ex ) {}
+			if(pstmt != null) try {pstmt.close();}catch(SQLException ex) {}
+			if(conn != null) try {conn.close();}catch(SQLException ex) {}
+		}
+		
+		return post;
+	}
+	
 	public postDTO readPost(int postId) {
 		postDTO post = null;
 		String update_query = 
-				"update post set lookUp = lookUp + 1 where postId = ?";
+				"update Post set lookUp = lookUp + 1 where postId = ?";
 		String select_query = 
 				"SELECT `Post`.`postId`," + 
 					"`Post`.`boardId`," + 
-					"`Post`.`title`," + 
+					"`Post`.`p_title`," +
+					"`Post`.`userRole`," +
+					"`Post`.`nickName`," + 
 					"`Post`.`userId`," + 
 					"`Post`.`content`," + 
 					"`Post`.`fileUrl`," +
@@ -174,7 +223,7 @@ public class postDAO {
 					"`Post`.`createAt`," + 
 					"`Post`.`updateAt`," + 
 					"`Post`.`status`" + 
-				"FROM `DB_sem`.`Post` where boardId = ?";
+				"FROM `DB_sem`.`Post` where postId = ?";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(update_query);
@@ -189,7 +238,9 @@ public class postDAO {
 				post = new postDTO();
 				post.setPostId(rs.getInt("postId"));
 				post.setBoardId(rs.getString("boardId"));
-				post.setTitle(rs.getString("title"));
+				post.setP_title(rs.getString("p_title"));
+				post.setUserRole(rs.getString("userRole"));
+				post.setNickName(rs.getString("nickName"));
 				post.setUserId(rs.getString("userId"));
 				post.setContent(rs.getString("content"));
 				post.setFileUrl(rs.getString("fileUrl"));
@@ -207,12 +258,12 @@ public class postDAO {
 		return post;
 	}
 	
-	public int updatePost(postDTO post, int postId) {
+	public int updatePost(String p_title, String content, String fileUrl, String updateAt, int postId) {
 		int x = -1;
 		String query = 
 				"UPDATE `DB_sem`.`Post`" + 
 				"SET" + 
-					"`title` = ?," + 
+					"`p_title` = ?," + 
 					"`content` = ?," + 
 					"`fileUrl` = ?," + 
 					"`updateAt` = ?," + 
@@ -220,10 +271,10 @@ public class postDAO {
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, post.getTitle());
-			pstmt.setString(2, post.getContent());
-			pstmt.setString(3, post.getFileUrl());
-			pstmt.setString(4, post.getUpdateAt());
+			pstmt.setString(1, p_title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, fileUrl);
+			pstmt.setString(4, updateAt);
 			pstmt.setInt(5, postId);
 			
 			pstmt.executeUpdate();
@@ -241,7 +292,10 @@ public class postDAO {
 	public int deletePost(int postId) {
 		int x = -1;
 		String query = 
-				"delete from Post where postId = ?";
+				"UPDATE `DB_sem`.`Post`" + 
+				"SET" + 
+				"`status` = '0'" + 
+				"WHERE `postId` = ?;";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
