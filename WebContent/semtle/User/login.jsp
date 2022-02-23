@@ -14,6 +14,18 @@
 			login_result = event.target.value;
 		}
 	}
+	
+	function loginRSA(id, pw) {
+		//rsa 암호화
+		var rsa = new RSAKey();
+		rsa.setPublic($('#RSAModulus')).val(), $('#RSAExponent').val());
+		
+		$("#userId").val(rsa.encrypt(id));
+		$("#userPassword").val(rsa.encrypt(pw));
+		
+		return true;
+	}
+	
 </script>
 </head>
 

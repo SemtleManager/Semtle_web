@@ -14,10 +14,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/semtle/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet" />
-
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script type="text/javascript" src="${pageContext.request.contextPath}/semtle/js/rsa.js">
+    </script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/semtle/js/jsbn.js">
+    </script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/semtle/js/prng4.js">
+    </script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/semtle/js/rng.js">
+    </script>
   </head>
 <body>
 	<c:choose>
@@ -29,7 +35,7 @@
 	   <nav class="navbar">
 	     <a href="board_list_Notice.doNotice">공지사항</a>
 	     <a href="board_list_Free.doPost">자유게시판</a>
-	     <a href="${pageContext.request.contextPath}/semtle/Study/study.jsp?title=스터디룸">스터디룸</a>
+	     <a href="board_Study.doStudy">스터디룸</a>
 	     <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
 	     <a href="#">공모전(아직 준비중입니다)</a>
 	   </nav>
@@ -55,7 +61,7 @@
     <nav class="navbar">
      <a href="board_list_Notice.doNotice">공지사항</a>
      <a href="board_list_Free.doPost">자유게시판</a>
-     <a href="${pageContext.request.contextPath}/semtle/Study/study.jsp?title=스터디룸">스터디룸</a>
+     <a href="board_Study.doStudy">스터디룸</a>
      <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
      <a href="#">공모전(아직 준비중입니다)</a>
     </nav>
@@ -67,7 +73,7 @@
     <nav class="navbar">
      <a href="board_list_Notice.doNotice">공지사항</a>
      <a href="board_list_Free.doPost">자유게시판</a>
-     <a href="${pageContext.request.contextPath}/semtle/Study/study.jsp?title=스터디룸">스터디룸</a>
+     <a href="board_Study.doStudy">스터디룸</a>
      <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
       <a href="#">공모전(아직 준비중입니다)</a>
     </nav>

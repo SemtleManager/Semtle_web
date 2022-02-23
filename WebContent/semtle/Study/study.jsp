@@ -19,7 +19,7 @@
 
     <section class="studyroom">
       <div class="studyroom-top">
-        <a href="${pageContext.request.contextPath}/semtle/Study/study_board.jsp?title=스터디룸&lang=C">
+        <a href="board_list_Study.doStudy?title=C언어">
           <div class="studyroom-box">
             <div class="study-content">
               <div class="study-content-head">
@@ -32,7 +32,7 @@
           </div>
         </a>
 
-        <a href="${pageContext.request.contextPath}/semtle/Study/study_board.jsp?title=스터디룸&lang=JAVA">
+        <a href="board_list_Study.doStudy?title=JAVA">
           <div class="studyroom-box">
             <div class="study-content">
               <div class="study-content-head">
@@ -47,7 +47,7 @@
         </a>
         
       <div class="studyroom-top">
-        <a href="${pageContext.request.contextPath}/semtle/Study/study_board.jsp?title=스터디룸&lang=PYTHON">
+        <a href="board_list_Study.doStudy?title=파이썬">
           <div class="studyroom-box">
             <div class="study-content">
               <div class="study-content-head">
@@ -60,7 +60,7 @@
           </div>
         </a>
         
-        <a href="${pageContext.request.contextPath}/semtle/Study/study_board.jsp?title=스터디룸&lang=LINUX">
+        <a href="board_list_Study.doStudy?title=리눅스">
           <div class="studyroom-box">
             <div class="study-content">
               <div class="study-content-head">

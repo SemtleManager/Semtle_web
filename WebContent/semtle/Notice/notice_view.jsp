@@ -23,13 +23,17 @@
             </div>
           </div>
           <div class="notice_text-content-main">
-            <span>
+            <span style="word-break : break-all; white-space: pre-line;">
               ${ post.content }
             </span>
           </div>
           <div style="width:100%;">
             <p style="font-size : 10px;">
-             	<a href="notice_download.doNotice?postId=${ post.postId }">파일 : ${ post.fileUrl }</a>
+            <c:choose>
+            	<c:when test="${ post.fileUrl ne null }">
+             		<a href="notice_download.doNotice?postId=${ post.postId }">파일 : ${ post.fileUrl }</a>
+             	</c:when>
+            </c:choose>
             </p>
           </div>
           <div class="notice_text-content-foot">

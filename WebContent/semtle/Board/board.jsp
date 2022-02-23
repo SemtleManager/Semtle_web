@@ -61,7 +61,7 @@
           </c:when>
           </c:choose>
           <div class="talk-content-main">
-            <span>
+            <span style="word-break : break-all; white-space: pre-line;">
 				${ dto.content }
              </span>
           </div>

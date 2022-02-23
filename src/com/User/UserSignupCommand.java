@@ -24,7 +24,7 @@ public class UserSignupCommand implements UserCommand{
 		String userPassword = request.getParameter("userPassword");
 		String userEmail = request.getParameter("userEmail");
 		String userPhone = request.getParameter("userPhone");
-		String userRole = "JE";
+		String userRole = "셈틀회원";
 		String createAt = sdf.format(new Timestamp(System.currentTimeMillis()));
 		String updateAt = sdf.format(new Timestamp(System.currentTimeMillis()));
 		String status = "1";
@@ -32,7 +32,7 @@ public class UserSignupCommand implements UserCommand{
 		dao.signUp(grade, nickName, userCode, userName, userId, userPassword, userEmail, userPhone, userRole, createAt, updateAt, status);
 		
 		PrintWriter writer = response.getWriter();
-		writer.println("<script>alert('셈틀회원이 되신걸 축하합니다~~'); location.href='../index.jsp';</script>");
+		writer.println("<script>alert('셈틀회원이 되신걸 축하합니다~~'); location.href='home.do';</script>");
 		writer.close();
 		
 		userDTO dto = dao.selectInfo(userId, userPassword);

@@ -1,4 +1,4 @@
-package com.Notice;
+package com.Study;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,15 +15,14 @@ import com.Post.postDAO;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-public class NoticeWriteCommand implements NoticeCommand{
-	
+public class StudyWriteCommand implements StudyCommand {
+
 	@Override
 	public int execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String realFolder = "";
-		String filename = "null";
+		String filename = "";
 		String saveFolder = "/upload";
 		String encType = "utf-8";
 		int maxSize = 20*1024*1024;
@@ -37,10 +36,7 @@ public class NoticeWriteCommand implements NoticeCommand{
 		String title = (String)session.getAttribute("title");
 		
 		String boardId = (String)session.getAttribute("boardId");
-		//int sizeLimit = 20 * 1024 * 1024;
-		//String savePath = request.getSession().getServletContext().getRealPath("/upload");
-		//System.out.println("SavePath = " + savePath);
-
+		
 		try {
 			multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 			

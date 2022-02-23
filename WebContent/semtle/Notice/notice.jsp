@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<c:set var="page" value="${(param.p == null) ? 1 : param.p}"/>
+<c:set var="startNum" value="${page - (page-1) % 5 }"/>
+<c:set var="lastNum" value="23"/>	
+<c:set var="isLast" value="4" />
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,7 +29,7 @@
     <section class="noticeboard">
     
     <c:choose>
-    	<c:when test="${not empty userInfo.userId && userIndo.userRole != 'JE'}">
+    	<c:when test="${not empty userInfo.userId && userIndo.userRole != '셈틀회원'}">
       <div class="talkboard-head">
         <a href="notice_write.doNotice"
           ><span class="talkboard-head_write">글쓰기</span></a
@@ -51,6 +54,11 @@
           	<span>${ dto.userRole }</span>
             <div class="notice-content-head">
               <span>${ dto.p_title }</span>
+              <c:choose>
+              <c:when test="${ dto.fileUrl  ne null }" >
+              	<i class="fas fa-paperclip"></i>
+              </c:when>
+              </c:choose>
             </div>
             <div class="notice-content-foot">
               <span>${ dto.updateAt }</span>
@@ -95,6 +103,15 @@
         </div>-->
       </div>
       </c:forEach>
+      <!-- <div class="page">
+		<ul class="paging modal">
+      		<li> <a href="#" class="first">처음으로</a></li>
+			<li> <a href="#" class="arrow left">&lt;&lt;&lt;</a></li>
+     		<li> <a href="#" class="num">1</a></li>
+      		<li> <a href="#" class="arrow right">&gt;&gt;&gt;</a></li>
+				<li> <a href="#" class="last">마지막으로</a></li>
+      	</ul>
+	</div> -->
       </c:otherwise>
       
       </c:choose>

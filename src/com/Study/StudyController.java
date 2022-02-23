@@ -1,7 +1,6 @@
-package com.Notice;
+package com.Study;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,21 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.Post.PostCommand;
-import com.Post.PostListCommand;
+import com.Notice.NoticeCommand;
+import com.Notice.NoticeDownloadCommand;
+import com.Notice.NoticeListCommand;
+import com.Notice.NoticeModifyCommand;
+import com.Notice.NoticeViewCommand;
+import com.Notice.NoticeWriteCommand;
 
 /**
- * Servlet implementation class NoticeController
+ * Servlet implementation class StudyController
  */
-@WebServlet("*.doNotice")
-public class NoticeController extends HttpServlet {
-	NoticeCommand command = null;
+@WebServlet("*.doStudy")
+public class StudyController extends HttpServlet {
+	StudyCommand command = null;
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeController() {
+    public StudyController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,10 +51,9 @@ public class NoticeController extends HttpServlet {
 		doAction(request, response);
 	}
 	
-	private synchronized void setCommand(NoticeCommand command) {
+	private synchronized void setCommand(StudyCommand command) {
 		this.command = command;
 	}
-	
 	private synchronized void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("do PostController");
 		HttpSession session = request.getSession();
@@ -71,39 +73,47 @@ public class NoticeController extends HttpServlet {
 		title = (String) session.getAttribute("title");
 		
 		try {
-			if(commandName.equals("/semtle/notice_write.doNotice")) {
-				viewPage = "/semtle/Notice/notice_text.jsp";
+			if(commandName.equals("/semtle/study_write.doStudy")) {
+				viewPage = "/semtle/Study/notice_text.jsp";
 				boardId = (String) request.getAttribute("boardId");
-			}else if(commandName.equals("/semtle/notice_text.doNotice")) {
-				viewPage = "/semtle/Notice/notice.jsp";
+			}else if(commandName.equals("/semtle/study_text.doStudy")) {
+				viewPage = "/semtle/Study/notice.jsp";
 				boardId = (String) request.getAttribute("boardId");
-				setCommand(new NoticeWriteCommand());
+				setCommand(new StudyWriteCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/notice_view.doNotice")) {
-				viewPage = "/semtle/Notice/notice_view.jsp";
-				setCommand(new NoticeViewCommand());
+			}else if(commandName.equals("/semtle/study_view.doStudy")) {
+				viewPage = "/semtle/Study/notice_view.jsp";
+				setCommand(new StudyViewCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/notice_download.doNotice")) {
-				setCommand(new NoticeDownloadCommand());
+			}else if(commandName.equals("/semtle/study_download.doStudy")) {
+				setCommand(new StudyDownloadCommand());
 				int postId = command.execute(request, response);
 				viewPage = "notice_view.doNotice?postId="+postId;
-			}else if(commandName.equals("/semtle/notice_setting.doNotice")) {
-				viewPage = "/semtle/Notice/notice_setting.jsp";
-			}else if(commandName.equals("/semtle/noctice_update.doNotice")) {
-				setCommand(new NoticeModifyCommand());
+			}else if(commandName.equals("/semtle/study_setting.doStudy")) {
+				viewPage = "/semtle/Study/notice_setting.jsp";
+			}else if(commandName.equals("/semtle/study_update.doStudy")) {
+				setCommand(new StudyModifyCommand());
 				command.execute(request, response);
-				viewPage = "/semtle/Notice/notice.jsp";
-			}else if(commandName.equals("/semtle/notice_delete.doNotice")) {
+				viewPage = "/semtle/Study/notice.jsp";
+			}else if(commandName.equals("/semtle/study_delete.doStudy")) {
 				
-			}else if(commandName.equals("/semtle/board_list_Notice.doNotice")) {
-				viewPage = "/semtle/Notice/notice.jsp";
-				title = "공지사항";
-				boardId = "Notice";
+			}else if(commandName.equals("/semtle/board_list_Study.doStudy")) {
+				viewPage = "/semtle/Study/study_board.jsp";
+				title = request.getParameter("title");
+				boardId = title;
 				session.setAttribute("title", title);
 				session.setAttribute("boardId", boardId);
-				setCommand(new NoticeListCommand());
+				setCommand(new StudyListCommand());
 				command.execute(request, response);
-			}else {
+			}else if(commandName.equals("/semtle/board_Study.doStudy")) {
+				viewPage = "/semtle/Study/study.jsp";
+				title = "스터디룸";
+				boardId = "Study";
+				session.setAttribute("title", title);
+				session.setAttribute("boardId", boardId);
+			}
+			
+			else {
 				System.out.println("해당 Command가 없습니다.");
 				viewPage = "notCommand.jsp";
 			}
@@ -115,6 +125,7 @@ public class NoticeController extends HttpServlet {
 		}catch(IllegalStateException e) {
 			System.out.println("Illegal");
 		}
-		
 	}
+	
+
 }

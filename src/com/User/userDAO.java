@@ -73,7 +73,7 @@ public class userDAO {
 			pstmt.setInt(3,  userCode);
 			pstmt.setString(4,  userName);
 			pstmt.setString(5,  userId);
-			pstmt.setString(6,  userPassword);
+			pstmt.setString(6,  Utility.encoding(userPassword));
 			pstmt.setString(7,  userEmail);
 			pstmt.setString(8,  userPhone);
 			pstmt.setString(9,  userRole);
@@ -102,7 +102,7 @@ public class userDAO {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, id);
-			pstmt.setString(2, passwd);
+			pstmt.setString(2, Utility.encoding(passwd));
 			
 			rs = pstmt.executeQuery();
 			
@@ -131,7 +131,7 @@ public class userDAO {
 			pstmt = conn.prepareStatement(query);
 			
 			pstmt.setString(1, userId);
-			pstmt.setString(2, userPassword);
+			pstmt.setString(2, Utility.encoding(userPassword));
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
@@ -235,7 +235,7 @@ public class userDAO {
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, passwd);
+			pstmt.setString(1, Utility.encoding(passwd));
 			pstmt.setString(2, id);
 			
 			pstmt.executeUpdate();

@@ -8,7 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemtleWeb</title>
-
+	<script type="text/javascript">
+		const autoHyphen = (target) => {
+			 target.value = target.value
+			   .replace(/[^0-9]/, '')
+			   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+			}
+	
+	</script>
   </head>
 
   <body>
@@ -71,7 +78,7 @@
 
           <tr>
             <td align="center"><label>전화번호</label></td>
-            <td class="inputbox"><input type="tel" name="userPhone" placeholder="010-0000-0000"/></td>
+            <td class="inputbox"><input type="tel" id="phoneNum" name="userPhone" placeholder="010-0000-0000" oninput="autoHyphen(this)"/></td>
           </tr>
         </table>
         <input type="submit" class="join_btn" value="가입하기">
