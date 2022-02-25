@@ -19,7 +19,7 @@
 textarea {
   margin-top:20px;
   width: 100%;
-  height: 300px;
+  height: 350px;
   resize: none;
   overflow-y: hidden;
   font-size: 15px;
@@ -35,11 +35,11 @@ textarea {
 .board_append #write_submit {
   background-color: var(--purple);
   padding: 8px 15px;
-  border-radius: 25px;
-  font-size: 16px;
+  border-radius: 20px;
+  font-size: 14px;
 }
 
 .board_append label {
-  font-size: 16px;
+  font-size: 14px;
   color: #d09193;
 }

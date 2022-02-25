@@ -22,7 +22,7 @@ public class StudyWriteCommand implements StudyCommand {
 		// TODO Auto-generated method stub
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String realFolder = "";
-		String filename = "";
+		String filename = "null";
 		String saveFolder = "/upload";
 		String encType = "utf-8";
 		int maxSize = 20*1024*1024;
@@ -36,7 +36,10 @@ public class StudyWriteCommand implements StudyCommand {
 		String title = (String)session.getAttribute("title");
 		
 		String boardId = (String)session.getAttribute("boardId");
-		
+		//int sizeLimit = 20 * 1024 * 1024;
+		//String savePath = request.getSession().getServletContext().getRealPath("/upload");
+		//System.out.println("SavePath = " + savePath);
+
 		try {
 			multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 			
@@ -65,7 +68,7 @@ public class StudyWriteCommand implements StudyCommand {
 		dao.writePost(boardId, p_title, userRole, nickName, userId, content, fileUrl, lookUp, createAt, updateAt, status);
 		PrintWriter writer = response.getWriter();
 		
-		writer.println("<script>alert('게시글이 작성되었습니다.'); location.href='board_list_"+boardId+".doNotice';</script>");
+		writer.println("<script>alert('게시글이 작성되었습니다.'); location.href='board_list_Study.doStudy?title="+boardId+"';</script>");
 		writer.close();
 		return 1;
 		

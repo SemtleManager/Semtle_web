@@ -75,6 +75,20 @@
   opacity: 80%;
 }
 
+.talk-content-head3 {
+  position: fixed;
+  right: 50px;
+}
+
+.commentwrite-form {
+  width: 100%;
+}
+.commentwrite {
+  width: 100%;
+  background-color: var(--light-gray);
+  border-radius: 10px;
+}
+
 .talk-content-main {
   margin-top: 15px;
   margin-bottom: 30px;
@@ -100,8 +114,9 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
+
 .talk-content-foot-etc span {
   padding: 4px 8px;
   border: var(--border);
@@ -110,22 +125,18 @@
 }
 
 .talk-content-foot-etc .talk-comment {
-  margin-left: 10px;
+  margin-left: 7px;
 }
 
 .talk-content-comment {
   width: 100%;
-  display: none;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   padding: 5px 15px;
   background-color: var(--light-gray);
   border-radius: 10px;
-}
-
-.talk-content-comment.active {
-  display: flex;
 }
 
 .talk-content-commentbox {

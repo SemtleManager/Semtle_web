@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.Notice.NoticeCommand;
-import com.Notice.NoticeDownloadCommand;
-import com.Notice.NoticeListCommand;
-import com.Notice.NoticeModifyCommand;
-import com.Notice.NoticeViewCommand;
-import com.Notice.NoticeWriteCommand;
+import com.Study.StudyCommand;
+import com.Study.StudyDeleteCommand;
+import com.Study.StudyDownloadCommand;
+import com.Study.StudyListCommand;
+import com.Study.StudyModifyCommand;
+import com.Study.StudyViewCommand;
+import com.Study.StudyWriteCommand;
 
 /**
  * Servlet implementation class StudyController
@@ -73,31 +74,35 @@ public class StudyController extends HttpServlet {
 		title = (String) session.getAttribute("title");
 		
 		try {
-			if(commandName.equals("/semtle/study_write.doStudy")) {
-				viewPage = "/semtle/Study/notice_text.jsp";
+			if(commandName.equals("/study_write.doStudy")) {
+				viewPage = "/semtle/Study/study_board_text.jsp";
 				boardId = (String) request.getAttribute("boardId");
-			}else if(commandName.equals("/semtle/study_text.doStudy")) {
-				viewPage = "/semtle/Study/notice.jsp";
+			}else if(commandName.equals("/study_text.doStudy")) {
+				viewPage = "/semtle/Study/study.jsp";
 				boardId = (String) request.getAttribute("boardId");
 				setCommand(new StudyWriteCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/study_view.doStudy")) {
-				viewPage = "/semtle/Study/notice_view.jsp";
+			}else if(commandName.equals("/study_view.doStudy")) {
+				viewPage = "/semtle/Study/study_board_room.jsp";
 				setCommand(new StudyViewCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/study_download.doStudy")) {
+			}else if(commandName.equals("/study_download.doStudy")) {
 				setCommand(new StudyDownloadCommand());
 				int postId = command.execute(request, response);
-				viewPage = "notice_view.doNotice?postId="+postId;
-			}else if(commandName.equals("/semtle/study_setting.doStudy")) {
-				viewPage = "/semtle/Study/notice_setting.jsp";
-			}else if(commandName.equals("/semtle/study_update.doStudy")) {
+				viewPage = "study_view.doStudy?postId="+postId;
+			}else if(commandName.equals("/study_setting.doStudy")) {
+				viewPage = "/semtle/Study/study_setting.jsp";
+				setCommand(new StudyViewCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/study_update.doStudy")) {
 				setCommand(new StudyModifyCommand());
 				command.execute(request, response);
-				viewPage = "/semtle/Study/notice.jsp";
-			}else if(commandName.equals("/semtle/study_delete.doStudy")) {
-				
-			}else if(commandName.equals("/semtle/board_list_Study.doStudy")) {
+				viewPage = "/semtle/Study/study.jsp";
+			}else if(commandName.equals("/study_delete.doStudy")) {
+				viewPage = "/semtle/Study/study.jsp";
+				setCommand(new StudyDeleteCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/board_list_Study.doStudy")) {
 				viewPage = "/semtle/Study/study_board.jsp";
 				title = request.getParameter("title");
 				boardId = title;
@@ -105,15 +110,13 @@ public class StudyController extends HttpServlet {
 				session.setAttribute("boardId", boardId);
 				setCommand(new StudyListCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/board_Study.doStudy")) {
+			} else if(commandName.equals("/Study.doStudy")) {
 				viewPage = "/semtle/Study/study.jsp";
 				title = "스터디룸";
-				boardId = "Study";
 				session.setAttribute("title", title);
-				session.setAttribute("boardId", boardId);
-			}
-			
-			else {
+			}else if(commandName.equals("/study_room.doStudy")) {
+				viewPage = "/semtle/Study/study_board_room.jsp";
+			}else {
 				System.out.println("해당 Command가 없습니다.");
 				viewPage = "notCommand.jsp";
 			}
@@ -125,7 +128,6 @@ public class StudyController extends HttpServlet {
 		}catch(IllegalStateException e) {
 			System.out.println("Illegal");
 		}
+		
 	}
-	
-
 }

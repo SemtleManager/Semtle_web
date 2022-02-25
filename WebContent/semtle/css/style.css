@@ -9,6 +9,7 @@
 @import "login_join/login.css";
 @import "login_join/signup.css";
 @import "studyboard/studyboard.css";
+@import "login_join/info.css";
 
 @font-face {
   font-family: "KOTRAHOPE";
@@ -175,7 +176,7 @@ body {
 }
 
 .calendar .calendar-box {
-  display	:flex;
+  display   :flex;
   width: 85%;
   height: 100%;
   margin-bottom:15px;
@@ -222,7 +223,7 @@ body {
 
 .notice .notice-box {
   width: 85%;
-  height: 30%;
+  height: 100%;
   background-color: var(--light-gray);
   border-radius: 25px;
   padding: 15px;
@@ -231,10 +232,6 @@ body {
   align-items: center;
   flex-direction: column;
   margin-bottom: 20px;
-}
-
-.notice .notice-box1 {
-  background-color: var(--light-gray);
 }
 
 .book .book-box {
@@ -256,35 +253,30 @@ body {
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
+  background: none;
 }
 
 .notice .notice-heading h3,
 .notice .notice-heading i {
   font-size: 13px;
-  line-height: 8px;
 }
 
 .notice .notice-content {
   font-size: 10px;
   display: none;
+  background: none;
+  border: none;
+  justify-content: center;
+  align-items: center;
 }
 
-.notice.active {
-  height: 300px;
-}
-.notice .notice-content1.active,
-.notice .notice-content2.active {
-  display: block;
-}
-
-.notice .notice-box1.active,
-.notice .notice-box2.active {
-  height: 50%;
+.notice .active .notice-content {
+   display: flex;
 }
 
 .book .slide {
   width: 120px;
-  height: 140px;
+  height: 172px;
   box-shadow: var(--box-shadow);
 }
 
@@ -430,16 +422,19 @@ i[class^="icon-chevron"] {
 
 
 .setting {
-	width : 100%;
-	text-align: right;
+   width : 100%;
+   text-align: right;
     text-decoration: underline;
     font-size: 0.2rem;
     
-	
-}/* 
+   
+}
+
+
+
 .page{
 	text-align: center;
-	width: 300px;
+	width: 100%;
 	margin: auto;
 	margin-bottom: 30px;
 }
@@ -483,5 +478,5 @@ i[class^="icon-chevron"] {
 
 .paging a:active {
 	outline: none;
-} */
+}
 

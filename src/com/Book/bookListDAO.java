@@ -31,7 +31,7 @@ public class bookListDAO {
 	//private 로 기본 생성자 차단
 	private bookListDAO() { }
 	
-	public void registeredBook(bookListDTO article) {
+	public void registeredBook(String bookName, String bookAuthor, String bookImage, String createAt, String updateAt, String status) {
 		String query =
 				"INSERT INTO `DB_sem`.`BookList`" + 
 				"(" + 
@@ -55,44 +55,52 @@ public class bookListDAO {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			
-			pstmt.setString(1, article.getBookName());
-			pstmt.setString(2, article.getBookAuthor());
-			pstmt.setString(3, article.getBookImage());
-			pstmt.setString(4, article.getCreateAt());
-			pstmt.setString(5, article.getUpdateAt());
-			pstmt.setString(6, article.getStatus());
+			pstmt.setString(1, bookName);
+			pstmt.setString(2, bookAuthor);
+			pstmt.setString(3, bookImage);
+			pstmt.setString(4, createAt);
+			pstmt.setString(5, updateAt);
+			pstmt.setString(6, status);
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			if(rs != null) try {rs.close();}catch(SQLException ex ) {}
-			if(pstmt != null) try {pstmt.close();}catch(SQLException ex) {}
-			if(conn != null) try {conn.close();}catch(SQLException ex) {}
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
 		}
 	}
 	
 	public List<bookListDTO> getBookList() {
 		List<bookListDTO> booklists = null;
 		String query = 
-				"SELECT " + 
-					"`BookList`.`bookName`," + 
-					"`BookList`.`bookAuthor`," + 
-					"`BookList`.`bookImage`," + 
-					"`BookList`.`status`" + 
-				"FROM `DB_sem`.`BookList` order by bookName desc";
+						"SELECT `BookList`.`bookId`," + 
+						"`BookList`.`bookName`," + 
+						"`BookList`.`bookAuthor`," + 
+						"`BookList`.`bookImage`," +
+						"`BookList`.`bookCount`," + 
+						"`BookList`.`createAt`," + 
+						"`BookList`.`updateAt`,"+ 
+						"`BookList`.`status`" + 
+				"FROM `DB_sem`.`BookList` order by bookName asc";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				booklists = new ArrayList<bookListDTO>();
+				booklists = new ArrayList<bookListDTO>(10);
 				do {
 					bookListDTO book = new bookListDTO();
+					book.setBookId(rs.getInt("bookId"));
 					book.setBookName(rs.getString("bookName"));
 					book.setBookAuthor(rs.getString("bookAuthor"));
 					book.setBookImage(rs.getString("bookImage"));
+					book.setBookCount(rs.getInt("bookCount"));
+					book.setCreateAt(rs.getString("createAt"));
+					book.setUpdateAt(rs.getString("updateAt"));
 					book.setStatus(rs.getString("status"));
+					
 					booklists.add(book);
 				}while(rs.next());
 			}
@@ -100,14 +108,14 @@ public class bookListDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
-			if(rs != null) try {rs.close();}catch(SQLException ex ) {}
-			if(pstmt != null) try {pstmt.close();}catch(SQLException ex) {}
-			if(conn != null) try {conn.close();}catch(SQLException ex) {}
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
 		}
 		return booklists;
 	}
 	
-	public bookListDTO selectBook(String bookId) {
+	public bookListDTO selectBook(int bookId) {
 		bookListDTO book = null;
 		String query = 
 				"SELECT `BookList`.`bookId`," + 
@@ -138,9 +146,9 @@ public class bookListDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(rs != null) try {rs.close();}catch(SQLException ex ) {}
-			if(pstmt != null) try {pstmt.close();}catch(SQLException ex) {}
-			if(conn != null) try {conn.close();}catch(SQLException ex) {}
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
 		}
 		return book;
 	}

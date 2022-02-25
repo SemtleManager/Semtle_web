@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<% 
-	String boardId = (String) request.getAttribute("boardId");
-	request.setAttribute("boardId", boardId);
-	
-%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
+	<link rel="icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/semtle/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
@@ -26,6 +23,7 @@
     </script>
   </head>
 <body>
+
 	<c:choose>
 	<c:when test="${empty title}">
 	
@@ -35,7 +33,7 @@
 	   <nav class="navbar">
 	     <a href="board_list_Notice.doNotice">공지사항</a>
 	     <a href="board_list_Free.doPost">자유게시판</a>
-	     <a href="board_Study.doStudy">스터디룸</a>
+	     <a href="Study.doStudy">스터디룸</a>
 	     <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
 	     <a href="#">공모전(아직 준비중입니다)</a>
 	   </nav>
@@ -61,7 +59,7 @@
     <nav class="navbar">
      <a href="board_list_Notice.doNotice">공지사항</a>
      <a href="board_list_Free.doPost">자유게시판</a>
-     <a href="board_Study.doStudy">스터디룸</a>
+     <a href="Study.doStudy">스터디룸</a>
      <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
      <a href="#">공모전(아직 준비중입니다)</a>
     </nav>
@@ -73,7 +71,7 @@
     <nav class="navbar">
      <a href="board_list_Notice.doNotice">공지사항</a>
      <a href="board_list_Free.doPost">자유게시판</a>
-     <a href="board_Study.doStudy">스터디룸</a>
+     <a href="Study.doStudy">스터디룸</a>
      <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
       <a href="#">공모전(아직 준비중입니다)</a>
     </nav>

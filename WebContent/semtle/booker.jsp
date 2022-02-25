@@ -1,4 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "com.Book.*" %>
+<%@ page import = "java.util.List" %>
+<%
+
+	ServletContext context = request.getSession().getServletContext();
+	String downaloadPath = context.getRealPath("bookIMG");
+	 
+	bookListDAO dao = bookListDAO.getInstance();
+
+	List<bookListDTO> lists = dao.getBookList();
+	request.setAttribute("path", downaloadPath);
+	request.setAttribute("list", lists);
+
+%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -15,92 +30,25 @@
         <span> 책 대여</span>
         <i class="fas fa-angle-right"></i>
       </div>
-
+	
       <div class="swiper book-box">
         <div class="swiper-wrapper book-wrapper">
+        <c:forEach items="${ list }" var="dto" varStatus="i">
           <div class="swiper-slide slide">
             <div class="image">
-              <img src="${pageContext.request.contextPath}/semtle/images/pic-1.png" alt="" />
+              <img src="../bookIMG/${ dto.bookImage }" alt="" />
             </div>
             <div class="content">
-              <h3>c언어</h3>
+            <h3>${ dto.bookImage }</h3>
+              <h3>${ dto.bookName }</h3>
               <div class="content_info">
-                <h2>김대현</h2>
+                <h2>${ dto.bookAuthor }</h2>
                 <h2>/</h2>
-                <h2>출판사</h2>
+                <h2>${ dto.bookCount }권</h2>
               </div>
             </div>
           </div>
-
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="${pageContext.request.contextPath}/semtle/images/pic-2.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>c언어</h3>
-              <div class="content_info">
-                <h2>김대현</h2>
-                <h2>/</h2>
-                <h2>출판사</h2>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="${pageContext.request.contextPath}/semtle/images/pic-3.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>c언어</h3>
-              <div class="content_info">
-                <h2>김대현</h2>
-                <h2>/</h2>
-                <h2>출판사</h2>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="${pageContext.request.contextPath}/semtle/images/pic-4.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>c언어</h3>
-              <div class="content_info">
-                <h2>김대현</h2>
-                <h2>/</h2>
-                <h2>출판사</h2>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="${pageContext.request.contextPath}/semtle/images/pic-4.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>c언어</h3>
-              <div class="content_info">
-                <h2>김대현</h2>
-                <h2>/</h2>
-                <h2>출판사</h2>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide slide">
-            <div class="image">
-              <img src="${pageContext.request.contextPath}/semtle/images/pic-4.png" alt="" />
-            </div>
-            <div class="content">
-              <h3>c언어</h3>
-              <div class="content_info">
-                <h2>김대현</h2>
-                <h2>/</h2>
-                <h2>출판사</h2>
-              </div>
-            </div>
-          </div>
+		</c:forEach>
         </div>
       </div>
     </div>

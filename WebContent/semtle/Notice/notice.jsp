@@ -1,9 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<c:set var="page" value="${(param.p == null) ? 1 : param.p}"/>
-<c:set var="startNum" value="${page - (page-1) % 5 }"/>
-<c:set var="lastNum" value="23"/>	
-<c:set var="isLast" value="4" />
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/semtle/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet" />
-
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
+	<link rel="icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -51,7 +49,6 @@
       <div class="noticeboard-box">
         <a href="notice_view.doNotice?postId=${ dto.postId }">
           <div class="notice-content">
-          	<span>${ dto.userRole }</span>
             <div class="notice-content-head">
               <span>${ dto.p_title }</span>
               <c:choose>
@@ -61,57 +58,26 @@
               </c:choose>
             </div>
             <div class="notice-content-foot">
+            <span>${ dto.userRole }</span>
+            <span>|</span>
               <span>${ dto.updateAt }</span>
             </div>
           </div>
         </a>
 
-<!--        <div class="notice-content">
-          <div class="notice-content-head">
-            <span>[공지] 셈틀 회원 모집합니다 :)</span>
-          </div>
-          <div class="notice-content-foot">
-            <span>2022.01.06</span>
-          </div>
-        </div>
-
-        <div class="notice-content">
-          <div class="notice-content-head">
-            <span>[공지] 셈틀 회원 모집합니다 :)</span>
-          </div>
-          <div class="notice-content-foot">
-            <span>2022.01.06</span>
-          </div>
-        </div>
-
-        <div class="notice-content">`
-          <div class="notice-content-head">
-            <span>[공지] 셈틀 회원 모집합니다 :)</span>
-          </div>
-          <div class="notice-content-foot">
-            <span>2022.01.06</span>
-          </div>
-        </div>
-
-        <div class="notice-content">
-          <div class="notice-content-head">
-            <span>[공지] 셈틀 회원 모집합니다 :)</span>
-          </div>
-          <div class="notice-content-foot">
-            <span>2022.01.06</span>
-          </div>
-        </div>-->
       </div>
       </c:forEach>
-      <!-- <div class="page">
+      <div class="page">
 		<ul class="paging modal">
-      		<li> <a href="#" class="first">처음으로</a></li>
-			<li> <a href="#" class="arrow left">&lt;&lt;&lt;</a></li>
-     		<li> <a href="#" class="num">1</a></li>
-      		<li> <a href="#" class="arrow right">&gt;&gt;&gt;</a></li>
-				<li> <a href="#" class="last">마지막으로</a></li>
+		
+			<li> <a href="board_list_Notice.doNotice?cpage=${prevBlock}" class="arrow left">&lt;&lt;</a></li>
+			<c:forEach var="i" begin="1" end="${ pageCount }" step="1">
+     		<li> <a href="board_list_Notice.doNotice?cpage=${i}" class="num">${i}</a></li>
+     		</c:forEach>
+      		<li> <a href="board_list_Notice.doNotice?cpage=${nextBlock}" class="arrow right">&gt;&gt;</a></li>
+		
       	</ul>
-	</div> -->
+	</div>
       </c:otherwise>
       
       </c:choose>

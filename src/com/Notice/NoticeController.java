@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.Post.PostCommand;
+import com.Post.PostDeleteCommand;
 import com.Post.PostListCommand;
 
 /**
@@ -71,31 +72,35 @@ public class NoticeController extends HttpServlet {
 		title = (String) session.getAttribute("title");
 		
 		try {
-			if(commandName.equals("/semtle/notice_write.doNotice")) {
+			if(commandName.equals("/notice_write.doNotice")) {
 				viewPage = "/semtle/Notice/notice_text.jsp";
 				boardId = (String) request.getAttribute("boardId");
-			}else if(commandName.equals("/semtle/notice_text.doNotice")) {
+			}else if(commandName.equals("/notice_text.doNotice")) {
 				viewPage = "/semtle/Notice/notice.jsp";
 				boardId = (String) request.getAttribute("boardId");
 				setCommand(new NoticeWriteCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/notice_view.doNotice")) {
+			}else if(commandName.equals("/notice_view.doNotice")) {
 				viewPage = "/semtle/Notice/notice_view.jsp";
 				setCommand(new NoticeViewCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/notice_download.doNotice")) {
+			}else if(commandName.equals("/notice_download.doNotice")) {
 				setCommand(new NoticeDownloadCommand());
 				int postId = command.execute(request, response);
 				viewPage = "notice_view.doNotice?postId="+postId;
-			}else if(commandName.equals("/semtle/notice_setting.doNotice")) {
+			}else if(commandName.equals("/notice_setting.doNotice")) {
 				viewPage = "/semtle/Notice/notice_setting.jsp";
-			}else if(commandName.equals("/semtle/noctice_update.doNotice")) {
+				setCommand(new NoticeViewCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/notice_update.doNotice")) {
 				setCommand(new NoticeModifyCommand());
 				command.execute(request, response);
 				viewPage = "/semtle/Notice/notice.jsp";
-			}else if(commandName.equals("/semtle/notice_delete.doNotice")) {
-				
-			}else if(commandName.equals("/semtle/board_list_Notice.doNotice")) {
+			}else if(commandName.equals("/notice_delete.doNotice")) {
+				viewPage = "/semtle/Notice/notice.jsp";
+				setCommand(new NoticeDeleteCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/board_list_Notice.doNotice")) {
 				viewPage = "/semtle/Notice/notice.jsp";
 				title = "공지사항";
 				boardId = "Notice";

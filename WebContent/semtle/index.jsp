@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/semtle/css/style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet" />
-
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
+	<link rel="icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -66,29 +67,29 @@
       </div>
     </section>
 
-    <section class="notice">
+	<section class="notice">
       <div class="notice-subject">
         <a href="notice.jsp"><span>공지사항</span></a>
         <a href="notice.jsp"><i class="fas fa-angle-right"></i></a>
       </div>
 
-      <div class="notice-box notice-box1">
-        <div class="notice-heading notice-heading1">
+      <div class="notice-box">
+        <div class="notice-heading">
           <h3>셈틀쟁이는 어떤 학회인가요?</h3>
           <i class="fas fa-angle-down"></i>
         </div>
-        <div class="notice-content notice-content1">
+        <div class="notice-content" id="thisone">
           <p>안녕하세요. 셈틀쟁이입니다. 환영해요!! 셈-하!!</p>
         </div>
       </div>
 
-      <div class="notice-box notice-box2">
-        <div class="notice-heading notice-heading2">
+      <div class="notice-box">
+        <div class="notice-heading">
           <h3>셈틀쟁이 웹은 어떻게 이용하나요?</h3>
           <i class="fas fa-angle-down"></i>
         </div>
-        <div class="notice-content notice-content2">
-          <p>안녕하세요. 셈틀쟁이입니다. 환영해요!! 셈-하!!</p>
+        <div class="notice-content">
+          <p>가입 문자 전화 디엠 주세요 ㅋㅋ</p>
         </div>
       </div>
     </section>

@@ -90,7 +90,7 @@ public class postDAO {
 	public int getPostCount(String boardId) {
 		int x = 0;
 		String query = 
-				"select count(*) from Post where boardId = ?";
+				"select count(*) from Post where boardId = ? and status = '1'";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
@@ -127,7 +127,7 @@ public class postDAO {
 					"`Post`.`createAt`," + 
 					"`Post`.`updateAt`," + 
 					"`Post`.`status`" + 
-				"FROM `DB_sem`.`Post` where boardId = ? order by createAt desc limit ?,?";
+				"FROM `DB_sem`.`Post` where boardId = ? and status = '1' order by createAt desc limit ?,?";
 		
 		try {
 			conn = db.getConnection();
@@ -266,7 +266,7 @@ public class postDAO {
 					"`p_title` = ?," + 
 					"`content` = ?," + 
 					"`fileUrl` = ?," + 
-					"`updateAt` = ?," + 
+					"`updateAt` = ?" + 
 				"WHERE `postId` = ?";
 		try {
 			conn = db.getConnection();

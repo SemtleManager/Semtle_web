@@ -4,20 +4,31 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.Post.postDAO;
 import com.Post.postDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class StudyDeleteCommand implements StudyCommand{
 
 	@Override
 	public int execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
+		String realFolder = "";
+		String saveFolder = "/upload";
+		String encType = "utf-8";
+		int maxSize = 20*1024*1024;
+		MultipartRequest multi = null;
+		ServletContext context = request.getSession().getServletContext();
+		realFolder = context.getRealPath(saveFolder);
+		multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
 		
-		int postId = Integer.parseInt(request.getParameter("postId"));
+		int postId = Integer.parseInt(multi.getParameter("postId"));
 		HttpSession session = request.getSession();
 		String boardId = (String) session.getAttribute("boardId");
 		postDAO dao = postDAO.getInstance();
@@ -33,7 +44,7 @@ public class StudyDeleteCommand implements StudyCommand{
 			if(uploadfile.exists() && uploadfile.isFile()) {
 				uploadfile.delete();
 			}
-			writer.println("<script>alert('게시글이 삭제되었습니다.'); location.href='board_list_"+boardId+".doNotice';</script>");
+			writer.println("<script>alert('게시글이 삭제되었습니다.'); location.href='board_list_Study.doStudy?title="+boardId+"';</script>");
 			writer.close();
 			return 1;
 		}else {
@@ -41,6 +52,7 @@ public class StudyDeleteCommand implements StudyCommand{
 			writer.close();
 			return 0;
 		}
+
 	}
 	
 }

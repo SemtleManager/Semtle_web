@@ -69,50 +69,50 @@ public class UserController extends HttpServlet {
 		System.out.println("commandName : " + commandName);
 		
 		try {
-			if(commandName.equals("/semtle/signup_user.do" )) {
+			if(commandName.equals("/signup_user.do" )) {
 				viewPage = "/semtle/User/signup.jsp";
 				title = "회원가입";
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/semtle/signup.do")) {
+			}else if(commandName.equals("/signup.do")) {
 				command = new UserSignupCommand();
 				command.execute(request, response);
 				viewPage = "/semtle/index.jsp";
-			}else if(commandName.equals("/semtle/login.do")) {
+			}else if(commandName.equals("/login.do")) {
 				command = new UserLoginCommand();
 				if(command.execute(request, response) == 1) {
 					System.out.println("@@@!");
 					command = new UserInfoCommand();
 					command.execute(request, response);
-					viewPage = "/semtle/index.jsp";
+					viewPage = "";
 				}else {
 					writer.println("<script>alert(\"아이디 또는 비밀번호가 맞지 않습니다.\"); history.go(-1);</script>");
 					writer.close();
-					viewPage = "/semtle/login.do";
+					viewPage = "/login.do";
 				}
 				title = null;
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/semtle/confirmId.do")) {
+			}else if(commandName.equals("/confirmId.do")) {
 				command = new UserConfirmIdCommand();
 				command.execute(request, response);
 				viewPage = "/semtle/signup.jsp";
 				title = "회원가입";
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/semtle/updateInfo.do")) {
+			}else if(commandName.equals("/updateInfo.do")) {
 				command = new UserModifyCommand();
 				command.execute(request, response);
 				viewPage = "info.jsp";
 				title = "정보 수정";
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/semtle/userInfo.do")) {
+			}else if(commandName.equals("/userInfo.do")) {
 				viewPage = "/semtle/User/info.jsp";
 				title = "내 정보";
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/semtle/login_form.do")){
+			}else if(commandName.equals("/login_form.do")){
 				viewPage = "/semtle/User/login.jsp?";
 				title = "로그인";
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/semtle/home.do")) {
-				viewPage = "/semtle/index.jsp";
+			}else if(commandName.equals("/home.do")) {
+				viewPage = "";
 				title = null;
 				session.setAttribute("title", title);
 			}else {

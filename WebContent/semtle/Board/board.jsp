@@ -9,6 +9,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
+	<link rel="icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemtleWeb</title>
 
@@ -57,7 +59,7 @@
           </div>
           <c:choose>
           <c:when test="${ dto.userId eq userInfo.userId }">
-          <span class="setting"><a style="color: #c0baba;" href="${pageContext.request.contextPath}/semtle/Board/board_update.jsp?"${ dto.userId }>수정/삭제</a></span>
+          <span class="setting"><a style="color: #c0baba;" href="board_setting.doPost?postId=${ dto.postId }">수정/삭제</a></span>
           </c:when>
           </c:choose>
           <div class="talk-content-main">
@@ -74,6 +76,18 @@
       </div>
       
       </c:forEach>
+       <div class="page">
+		<ul class="paging modal">
+		
+			<li> <a href="board_list_Free.doPost?cpage=${prevBlock}" class="arrow left">&lt;&lt;</a></li>
+			<c:forEach var="i" begin="1" end="${ pageCount }" step="1">
+     		<li> <a href="board_list_Free.doPost?cpage=${i}" class="num">${i}</a></li>
+     		</c:forEach>
+      		<li> <a href="board_list_Free.doPost?cpage=${nextBlock}" class="arrow right">&gt;&gt;</a></li>
+		
+      	</ul>
+	</div>
+      
       	</c:otherwise>
       </c:choose>
 <%--       <div class="talkboard-box">

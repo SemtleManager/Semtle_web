@@ -68,25 +68,27 @@ public class PostController extends HttpServlet {
 
 		title = (String) session.getAttribute("title");
 		try {
-			if(commandName.equals("/semtle/board_write.doPost")) {
+			if(commandName.equals("/board_write.doPost")) {
 				viewPage = "/semtle/Board/board_text.jsp";
 				boardId = (String) request.getAttribute("boardId");
-			}else if(commandName.equals("/semtle/board_text.doPost")) {
+			}else if(commandName.equals("/board_text.doPost")) {
 				viewPage = "/semtle/Board/board.jsp";
 				boardId = (String) request.getAttribute("boardId");
 				setCommand(new PostWriteCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/board_setting.doPost")) { 
+			}else if(commandName.equals("/board_setting.doPost")) { 
 				viewPage = "/semtle/Board/board_setting.jsp";
-			}else if(commandName.equals("/semtle/board_update.doPost")) {
+				setCommand(new PostViewCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/board_update.doPost")) {
 				setCommand(new PostModifyCommand());
 				command.execute(request, response);
 				viewPage ="/semtle/Board/board.jsp";
-			}else if(commandName.equals("/semtle/board_delete.doPost")) {
+			}else if(commandName.equals("/board_delete.doPost")) {
 				viewPage = "/semtle/Board/board.jsp";
 				setCommand(new PostDeleteCommand());
 				command.execute(request, response);
-			}else if(commandName.equals("/semtle/board_list_Free.doPost")) {
+			}else if(commandName.equals("/board_list_Free.doPost")) {
 				viewPage = "/semtle/Board/board.jsp";
 				title = "자유게시판";
 				boardId = "Free";

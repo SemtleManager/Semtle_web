@@ -6,6 +6,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
+	<link rel="icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemtleWeb</title>
   </head>
@@ -22,23 +24,26 @@
               <span>${ post.nickName } | ${ post.updateAt }</span>
             </div>
           </div>
+          <c:choose>
+          <c:when test="${ post.userId eq userInfo.userId }">
+          <span class="setting"><a style="color: #c0baba;" href="notice_setting.doNotice?postId=${ post.postId }">수정/삭제</a></span>
+          </c:when>
+          </c:choose>
           <div class="notice_text-content-main">
             <span style="word-break : break-all; white-space: pre-line;">
               ${ post.content }
             </span>
           </div>
-          <div style="width:100%;">
-            <p style="font-size : 10px;">
-            <c:choose>
-            	<c:when test="${ post.fileUrl ne null }">
-             		<a href="notice_download.doNotice?postId=${ post.postId }">파일 : ${ post.fileUrl }</a>
-             	</c:when>
-            </c:choose>
-            </p>
-          </div>
-          <div class="notice_text-content-foot">
-            <div class="notice_text-content-foot-etc"></div>
-          </div>
+          <c:choose>
+          	<c:when test="${ post.fileUrl ne null }">
+        	 <div class="notice_text-content-foot studyboard-foot">
+           	<div class="notice_text-content-foot-etc studyboard-foot-etc">
+           	  <span id="studyboard-foot-attach"><a href="study_download.doStudy?postId=${ post.postId }">${ post.fileUrl }</a></span>
+           	  <i class="fas fa-paperclip"></i>
+         		</div>
+        	 </div>
+         </c:when>
+        </c:choose>
         </div>
       </div>
     </section>

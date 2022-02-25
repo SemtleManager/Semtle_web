@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.Post.postDAO;
 import com.Post.postDTO;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 public class NoticeDeleteCommand implements NoticeCommand {
 
@@ -17,7 +20,16 @@ public class NoticeDeleteCommand implements NoticeCommand {
 	public int execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		
-		int postId = Integer.parseInt(request.getParameter("postId"));
+		String realFolder = "";
+		String saveFolder = "/upload";
+		String encType = "utf-8";
+		int maxSize = 20*1024*1024;
+		MultipartRequest multi = null;
+		ServletContext context = request.getSession().getServletContext();
+		realFolder = context.getRealPath(saveFolder);
+		multi = new MultipartRequest(request, realFolder, maxSize, encType, new DefaultFileRenamePolicy());
+		
+		int postId = Integer.parseInt(multi.getParameter("postId"));
 		HttpSession session = request.getSession();
 		String boardId = (String) session.getAttribute("boardId");
 		postDAO dao = postDAO.getInstance();

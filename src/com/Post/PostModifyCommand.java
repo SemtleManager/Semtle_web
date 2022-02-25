@@ -16,24 +16,16 @@ public class PostModifyCommand implements PostCommand{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 		HttpSession session = request.getSession();
 		String boardId = (String) session.getAttribute("boardId");
-		String title = request.getParameter("title");
+		String title = (String) session.getAttribute("title");
 		String p_title = "";
 		String content = request.getParameter("content");
 		String fileUrl = "";
 		String updateAt = sdf.format(new Timestamp(System.currentTimeMillis()));
 		int postId = Integer.parseInt(request.getParameter("postId"));
 		
-		if(title.equals("자유게시판")) {
-			p_title = "";
-			fileUrl = "";
-		}else if(title.equals("공지사항")) {
-			p_title = request.getParameter("p_title");
-			fileUrl = "";
-		}else if(title.equals("스터디룸")) {
-			p_title = request.getParameter("p_title");
-			fileUrl = "";
-		}
-		
+		p_title = "";
+		fileUrl = "";
+	
 		postDAO dao = postDAO.getInstance();
 		PrintWriter writer = response.getWriter();
 		
