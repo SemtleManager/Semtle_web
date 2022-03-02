@@ -32,21 +32,19 @@ public class commentDAO {
 	//private 로 기본 생성자 차단
 	private commentDAO() { }
 	
-	public void writeComment(commentDTO comment) {
+	public void writeComment(int postId, String nickName, String userId, String content, String createAt) {
 		String query = 
 				"INSERT INTO `DB_sem`.`Comment`" + 
 				"(" + 
-					"`commentId`," + 
 					"`postId`," + 
+					"`nickName`," +
 					"`userId`," + 
 					"`content`," + 
-					"`createAt`," + 
-					"`updateAt`" + 
+					"`createAt`" + 
 				")" + 
 				"VALUES" + 
 				"(" + 
-					"?," + 
-					"?," + 
+					"?," +
 					"?," + 
 					"?," + 
 					"?," + 
@@ -55,12 +53,11 @@ public class commentDAO {
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1,  comment.getCommentId());
-			pstmt.setString(2,  comment.getPostId());
-			pstmt.setString(3,  comment.getUserId());
-			pstmt.setString(4,  comment.getContent());
-			pstmt.setString(5,  comment.getCreateAt());
-			pstmt.setString(6,  comment.getUpdateAt());
+			pstmt.setInt(1,  postId);
+			pstmt.setString(2, nickName);
+			pstmt.setString(3, userId);
+			pstmt.setString(4,  content);
+			pstmt.setString(5,  createAt);
 			
 			pstmt.executeUpdate();
 		}catch(Exception e) {
@@ -72,14 +69,14 @@ public class commentDAO {
 		}
 	}
 	
-	public int getCommentCnt(String postId) {
+	public int getCommentCnt(int postId) {
 		int x = 0;
 		String query = 
-				"select count(*) from comment where PostId = ?";
+				"select count(*) from `Comment` where postId = ?";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
-			
+			pstmt.setInt(1,  postId);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next())
@@ -96,34 +93,32 @@ public class commentDAO {
 		return x;
 	}
 	
-	public List<commentDTO> getComments(int postId, int start, int end) {
+	public List<commentDTO> getComments(int postId) {
 		List<commentDTO> commentlists = null;
 		String query = 
 				"SELECT `Comment`.`commentId`," + 
 					"`Comment`.`postId`," + 
+					"`Comment`.`nickName`," +
 					"`Comment`.`userId`," + 
 					"`Comment`.`content`," + 
-					"`Comment`.`createAt`," + 
-					"`Comment`.`updateAt`" + 
-				"FROM `DB_sem`.`Comment` where postId = ? order by createAt desc limit ?,?";
+					"`Comment`.`createAt`" + 
+				"FROM `DB_sem`.`Comment` where postId = ? order by createAt desc";
 		
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1,  postId);
-			pstmt.setInt(2, start-1);
-			pstmt.setInt(3, end);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				commentlists = new ArrayList<commentDTO>(end);
+				commentlists = new ArrayList<commentDTO>();
 				do {
 					commentDTO comment = new commentDTO();
 					comment.setCommentId(rs.getInt("postId"));
+					comment.setNickName(rs.getString("nickName"));
 					comment.setUserId(rs.getString("userId"));
 					comment.setContent(rs.getString("content"));
 					comment.setCreateAt(rs.getString("createAt"));
-					comment.setUpdateAt(rs.getString("updateAt"));
 					
 					commentlists.add(comment);
 				}while(rs.next());
@@ -143,7 +138,7 @@ public class commentDAO {
 	public int deleteComment(int commentId) {
 		int x = -1;
 		String query = 
-				"delete from Comment where commentId = ?";
+				"delete from `Comment` where commentId = ?";
 		
 		try {
 			conn = db.getConnection();

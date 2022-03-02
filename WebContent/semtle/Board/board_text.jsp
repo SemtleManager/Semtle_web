@@ -16,7 +16,7 @@ function input_hidden() {
   if (ck) {
     document.freeboard_text.nickName.value = "익명";
   }else {
-	  document.freeboard_text.nickName.value = ${ userInfo.userId };
+	  document.freeboard_text.nickName.value = "${ userInfo.nickName }";
   }
 }
 </script>
@@ -36,7 +36,14 @@ function input_hidden() {
           <input type="hidden" name="userRole" value="${ userInfo.userRole }">
             <textarea id="content" name="content" placeholder="내용을 입력해주세요" ></textarea>
             <div class="board_append">
-              <label><input type="checkbox" name="freeboard_check" value="익명" id="freeboard_check" onclick="input_hidden()"/>익명</label>
+              <input
+                type="checkbox"
+                name="freeboard_check"
+                value="익명"
+                id="freeboard_check"
+                onclick="input_hidden();"
+              />
+              <label for="" id="freeboard_check">익명</label>
               <input type="submit" id="write_submit" value="완료" />
             </div>
           </form>

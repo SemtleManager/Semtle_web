@@ -19,32 +19,61 @@
       </div>
     </section>
 
-    <section class="bookboard">
-      <div class="book-head">
-        <input
-          type="text"
-          placeholder="책 제목을 검색하세요"
-          onclick="this.placeholder=''"
-          onblur="this.placeholder = '책 제목을 검색하세요'"
-        />
-        <i class="fas fa-search"></i>
+    <section class="bookboard talkboard">
+      <div class="bookboard-head talkboard-head">
+        <form action="" class="booksearch_form">
+          <input
+            type="text"
+            placeholder="책 제목을 입력해주세요"
+            class="booksearch"
+          />
+          <i class="fas fa-search"></i>
+        </form>
       </div>
-
-      <jsp:include page="${pageContext.request.contextPath}/semtle/booker.jsp" flush="true" />
     </section>
 
-    <footer class="footer">
-      <div class="footer-box">
-        <div class="footer-content">
-          셈틀쟁이 : 가톨릭대 성심교정 다솔관 D410
-        </div>
-        <div class="footer-content">회장 김대현 010-3249-7669</div>
-        <div class="footer-content">
-          <i class="fab fa-facebook"></i>
-          <i class="fab fa-instagram"></i>
+    <div class="takeoutbox-head">
+      <span>책 상세 정보</span>
+    </div>
+
+    <section class="takeoutbox">
+      <div class="takeoutbox-left">
+        <div class="takeout-image">
+          <img src="images/pic-1.png" alt="" />
         </div>
       </div>
-    </footer>
+      <div class="takeoutbox-right">
+        <div class="takeoutbox-title">
+          <span>C언어 일취월장</span>
+        </div>
+        <div class="takeoutbox-info">
+          <span>저자 </span>
+          <span class="info_slash">|</span>
+          <span>김대현</span>
+        </div>
+        <div class="takeoutbox-state">
+          <span>대출상태</span>
+          <span class="info_slash">|</span>
+          <span class="state_text">대출가능</span>
+        </div>
+        <div class="takeoutbox-count">
+          <span>대출가능 수량</span>
+          <span class="info_slash">|</span>
+          <span>2</span>
+        </div>
+        <div class="takeoutbox-btn">
+          <button class="takeout_btn">대출하기</button>
+          <button class="reserve_btn">예약하기</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="takeoutbox-head">
+      <span>책 목록</span>
+    </div>
+    <div class="book">
+      <jsp:include page="${pageContext.request.contextPath}/semtle/booker.jsp" flush="true" />
+	</div>
     <jsp:include page="${pageContext.request.contextPath}/semtle/footer.jsp" flush="true" />
   </body>
 </html>

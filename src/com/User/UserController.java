@@ -80,7 +80,6 @@ public class UserController extends HttpServlet {
 			}else if(commandName.equals("/login.do")) {
 				command = new UserLoginCommand();
 				if(command.execute(request, response) == 1) {
-					System.out.println("@@@!");
 					command = new UserInfoCommand();
 					command.execute(request, response);
 					viewPage = "";
@@ -100,21 +99,29 @@ public class UserController extends HttpServlet {
 			}else if(commandName.equals("/updateInfo.do")) {
 				command = new UserModifyCommand();
 				command.execute(request, response);
-				viewPage = "info.jsp";
+				viewPage = "login_form.do";
 				title = "정보 수정";
 				session.setAttribute("title", title);
 			}else if(commandName.equals("/userInfo.do")) {
-				viewPage = "/semtle/User/info.jsp";
+				viewPage = "/semtle/User/mypage.jsp";
 				title = "내 정보";
 				session.setAttribute("title", title);
-			}else if(commandName.equals("/login_form.do")){
-				viewPage = "/semtle/User/login.jsp?";
+			}else if(commandName.equals("/userUpdate.do")) {
+				viewPage = "/semtle/User/mypage_info.jsp";
+				title = "정보 수정";
+				session.setAttribute("title", title);
+			}
+			else if(commandName.equals("/login_form.do")){
+				viewPage = "/semtle/User/login.jsp";
 				title = "로그인";
 				session.setAttribute("title", title);
 			}else if(commandName.equals("/home.do")) {
 				viewPage = "";
 				title = null;
 				session.setAttribute("title", title);
+			}else if(commandName.equals("/logout.do")) {
+				command = new UserLogoutCommand();
+				command.execute(request, response);
 			}else {
 				System.out.println("해당 Command가 없습니다.");
 				viewPage = "notCommand.jsp";

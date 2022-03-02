@@ -96,7 +96,7 @@ public class userDAO {
 	public int login(String id, String passwd) {
 		int check = -1;
 		String query = 
-				"select * from User where userId = ? and userPassword = ?";
+				"select * from User where userId = ? and userPassword = ? and status = '1'";
 		
 		try {
 			conn = db.getConnection();
@@ -124,7 +124,7 @@ public class userDAO {
 	public userDTO selectInfo(String userId, String userPassword) {
 		userDTO user = null;
 		String query = 
-				"select * from User where userId = ? and userPassword = ?";
+				"select * from User where userId = ? and userPassword = ? and status = '1'";
 		
 		try {
 			conn = db.getConnection();

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.Comment.commentDTO;
 import com.DB.DBDAO;
 
 public class postDAO {
@@ -167,6 +168,49 @@ public class postDAO {
 			
 		}
 		return postlists;
+	}
+	
+public List<commentDTO> getComments() {
+		
+		List<commentDTO> commentlists = null;
+		String query = 
+				"SELECT `Comment`.`commentId`," + 
+					"`Comment`.`postId`," + 
+					"`Comment`.`nickName`," +
+					"`Comment`.`userId`," + 
+					"`Comment`.`content`," + 
+					"`Comment`.`createAt`" + 
+				"FROM `DB_sem`.`Comment`";
+		
+		try {
+			conn = db.getConnection();
+			pstmt = conn.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				commentlists = new ArrayList<commentDTO> ();
+				do {
+					commentDTO comment = new commentDTO();
+					comment.setPostId(rs.getInt("postId"));
+					comment.setNickName(rs.getString("nickName"));
+					comment.setUserId(rs.getString("userId"));
+					comment.setCommentId(rs.getInt("commentId"));
+					comment.setContent(rs.getString("content"));
+					comment.setCreateAt(rs.getString("CreateAt"));
+					
+					commentlists.add(comment);
+				}while(rs.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally{
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
+			
+		}
+		return commentlists;
 	}
 	
 	public postDTO viewPost(int postId) {

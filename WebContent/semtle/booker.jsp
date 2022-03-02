@@ -25,18 +25,13 @@
 
 <body>
 
-    <div class="book">
-      <div class="book-subject">
-        <span> 책 대여</span>
-        <i class="fas fa-angle-right"></i>
-      </div>
 	
       <div class="swiper book-box">
         <div class="swiper-wrapper book-wrapper">
         <c:forEach items="${ list }" var="dto" varStatus="i">
           <div class="swiper-slide slide">
             <div class="image">
-              <img src="../bookIMG/${ dto.bookImage }" alt="" />
+              <img src="${pageContext.request.contextPath}/bookIMG/${ dto.bookImage }" alt="" />
             </div>
             <div class="content">
             <h3>${ dto.bookImage }</h3>
@@ -51,6 +46,5 @@
 		</c:forEach>
         </div>
       </div>
-    </div>
 </body>
 </html>

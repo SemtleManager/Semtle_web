@@ -21,13 +21,25 @@
     </section>
 
     <section class="noticeboard">
-    <c:choose>
+     <c:choose>
+    <c:when test="${ empty userInfo.userId }">
+    
+    	<table style="margin:0 auto;">
+			<td style="height:300px;">
+				셈틀회원만이 이용 가능한 공간입니다.
+			</td>
+		</table>
+    
+      </c:when>
+      <c:otherwise>
+      	<c:choose>
     	<c:when test="${not empty userInfo.userId && userIndo.userRole != '셈틀회원'}">
             <div class="studyroom-head">
        			 <a href="study_write.doStudy"><span>글쓰기</span></a>
       		</div>		
       	</c:when>
     </c:choose>
+   
     
 	<c:choose>
     	<c:when test="${ post_count == 0}">
@@ -74,6 +86,10 @@
       </c:otherwise>
       
       </c:choose>
+      
+      </c:otherwise>
+      </c:choose>
+      
     </section>
 
 <jsp:include page="${pageContext.request.contextPath}/semtle/footer.jsp" flush="true" />

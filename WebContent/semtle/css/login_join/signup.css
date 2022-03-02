@@ -1,46 +1,68 @@
 .join {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 80px;
+  margin-top: 100px;
+  padding: 0 50px;
 }
 
 .joinform {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-content: center;
+  flex-direction: column;
 }
 
-.join table {
-  font-size: 16px;
-  border-collapse: separate;
-  border-spacing: 8px;
+.join_input {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 12px;
 }
 
-.join table tr,
-.join table td {
+.joinform input,
+.joinform select {
   width: 100%;
   height: 40px;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 0;
+  font-size: 13px;
 }
 
-.join table .inputbox input,
-.join table .inputbox select {
-  background-color: var(--color-hover);
-  border-radius: 5px;
+.joinform span {
+  width: 100%;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
   font-size: 16px;
-  width: 180px;
+  font-weight: bold;
+}
+
+.join_input label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 13px;
+}
+
+.join_btnbox {
+  margin-top: 20px;
 }
 
 .join_btn {
-  position: fixed;
-  top: 505px;
-  font-size: 14px;
-  padding: 9px 15px;
-  border-radius: 20px;
   background-color: var(--purple);
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  font-size: 15px;
   color: var(--color-text);
 }

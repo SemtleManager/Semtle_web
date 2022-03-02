@@ -29,16 +29,6 @@ public class PostWriteCommand implements PostCommand{
 		String p_title = "";
 		String userRole = request.getParameter("userRole");
 		
-		if(title.equals("자유게시판")) {
-			p_title = "";
-			fileUrl = "";
-		}else if(title.equals("공지사항")) {
-			p_title = request.getParameter("p_title");
-			fileUrl = "";
-		}else if(title.equals("스터디룸")) {
-			p_title = request.getParameter("p_title");
-			fileUrl = "";
-		}
 		
 		postDAO dao = postDAO.getInstance();
 		dao.writePost(boardId, p_title, userRole, nickName, userId, content, fileUrl, lookUp, createAt, updateAt, status);

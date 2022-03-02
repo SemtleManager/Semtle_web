@@ -27,7 +27,7 @@
     <section class="noticeboard">
     
     <c:choose>
-    	<c:when test="${not empty userInfo.userId && userIndo.userRole != '셈틀회원'}">
+    	<c:when test="${not empty userInfo.userId && userIndo.userRole ne '셈틀회원'}">
       <div class="talkboard-head">
         <a href="notice_write.doNotice"
           ><span class="talkboard-head_write">글쓰기</span></a

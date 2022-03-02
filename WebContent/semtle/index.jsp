@@ -93,9 +93,13 @@
         </div>
       </div>
     </section>
-    
-    <jsp:include page="${pageContext.request.contextPath}/semtle/booker.jsp" flush="true" />
-
+    <div class="book">
+      <div class="book-subject">
+        <span> 책 대여</span>
+        <i class="fas fa-angle-right"></i>
+      </div>
+    	<jsp:include page="${pageContext.request.contextPath}/semtle/booker.jsp" flush="true" />
+	</div>
 	<jsp:include page="${pageContext.request.contextPath}/semtle/footer.jsp" flush="true" />
   </body>
 </html>

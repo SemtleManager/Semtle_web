@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 55px;
 }
 
 .board_textbox {
@@ -17,7 +18,6 @@
 }
 
 textarea {
-  margin-top:20px;
   width: 100%;
   height: 350px;
   resize: none;
@@ -27,19 +27,21 @@ textarea {
 
 .board_append {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   text-align: center;
 }
 
 .board_append #write_submit {
   background-color: var(--purple);
-  padding: 8px 15px;
-  border-radius: 20px;
+  padding: 3px 8px;
+  border-radius: 10px;
   font-size: 14px;
+  margin-left: 10px;
+  color: var(--color-text);
 }
 
-.board_append label {
+#freeboard_check {
   font-size: 14px;
   color: #d09193;
 }

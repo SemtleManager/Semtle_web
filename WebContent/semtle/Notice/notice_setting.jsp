@@ -16,7 +16,7 @@ function input_hidden() {
   if (ck) {
     document.freeboard_text.nickName.value = "익명";
   }else {
-	  document.freeboard_text.nickName.value = ${ userInfo.userId };
+	  document.freeboard_text.nickName.value = "${ userInfo.nickName }";
   }
 }
 function btn_click(str) {

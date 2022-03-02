@@ -34,7 +34,7 @@
 <body>
 	<jsp:include page="${pageContext.request.contextPath}/semtle/header.jsp" flush="true" />
 
-	<a href="${pageContext.request.contextPath}/semtle/index.jsp"><section class="home" id="login-home">
+	<a href="home.do"><section class="home" id="login-home">
 			<div class="home-main">
 				<img src="${pageContext.request.contextPath}/semtle/images/login.PNG" alt="" />
 				<h3>셈틀쟁이</h3>
@@ -54,6 +54,7 @@
 						onclick="this.placeholder=''"
 						onblur="this.placeholder = 'PASSWORD'" />
 				</div>
+				<span style="color: #b0abab;font-size: 11px;">최초 회원가입 후 관리자의 승인 이후 로그인 가능합니다.</span>
 				<div class="btnform">
 					<input type="submit" class="login_btn" value="로그인"> </input>
 				</div>

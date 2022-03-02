@@ -17,6 +17,17 @@ for (var i = 0; i < notice.length; i++) {
   });
 }
 
+//const comment_title = document.querySelector(".talk-content-footone");
+//const comment = document.querySelector(".talk-content-foot");
+
+function comment_click(num) {
+	const comment = document.querySelector(".aa"+num);
+	comment.classList.toggle("contentactive");
+	
+	document.getElementsByName("postId")[0].value = num;
+	
+}
+
 var swiper = new Swiper(".book-box", {
   loop: true,
   grabCursor: true,
