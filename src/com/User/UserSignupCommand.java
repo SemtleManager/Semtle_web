@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ public class UserSignupCommand implements UserCommand{
 	public int execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		
+		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 		int grade = Integer.parseInt(request.getParameter("grade"));
 		String nickName = request.getParameter("nickName");
 		int userCode = Integer.parseInt(request.getParameter("userCode"));

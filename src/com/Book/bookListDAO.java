@@ -75,6 +75,50 @@ public class bookListDAO {
 	public List<bookListDTO> getBookList() {
 		List<bookListDTO> booklists = null;
 		String query = 
+						"SELECT DISTINCT" + 
+						"`BookList`.`bookName`," + 
+						"`BookList`.`bookAuthor`," + 
+						"`BookList`.`bookImage`," +
+						"`BookList`.`bookCount`," + 
+						"`BookList`.`createAt`," + 
+						"`BookList`.`updateAt`,"+ 
+						"`BookList`.`status`," +
+						"`BookList`.`userId`" + 
+				"FROM `DB_sem`.`BookList` order by rand()";
+		try {
+			conn = db.getConnection();
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				booklists = new ArrayList<bookListDTO>();
+				do {
+					bookListDTO book = new bookListDTO();
+					book.setBookName(rs.getString("bookName"));
+					book.setBookAuthor(rs.getString("bookAuthor"));
+					book.setBookImage(rs.getString("bookImage"));
+					book.setBookCount(rs.getInt("bookCount"));
+					book.setCreateAt(rs.getString("createAt"));
+					book.setUpdateAt(rs.getString("updateAt"));
+					book.setStatus(rs.getString("status"));
+					book.setUserId(rs.getString("userId"));
+					
+					booklists.add(book);
+				}while(rs.next());
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
+		}
+		return booklists;
+	}
+	
+	public List<bookListDTO> getSearchBookList(String bookName) {
+		List<bookListDTO> booklists = null;
+		String query = 
 						"SELECT `BookList`.`bookId`," + 
 						"`BookList`.`bookName`," + 
 						"`BookList`.`bookAuthor`," + 
@@ -82,14 +126,16 @@ public class bookListDAO {
 						"`BookList`.`bookCount`," + 
 						"`BookList`.`createAt`," + 
 						"`BookList`.`updateAt`,"+ 
-						"`BookList`.`status`" + 
-				"FROM `DB_sem`.`BookList` order by bookName asc";
+						"`BookList`.`status`," +
+						"`BookList`.`userId`" + 
+				"FROM `DB_sem`.`BookList` where bookName like ? order by bookName asc";
 		try {
 			conn = db.getConnection();
 			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%"+bookName+"%");
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				booklists = new ArrayList<bookListDTO>(10);
+				booklists = new ArrayList<bookListDTO>();
 				do {
 					bookListDTO book = new bookListDTO();
 					book.setBookId(rs.getInt("bookId"));
@@ -100,7 +146,7 @@ public class bookListDAO {
 					book.setCreateAt(rs.getString("createAt"));
 					book.setUpdateAt(rs.getString("updateAt"));
 					book.setStatus(rs.getString("status"));
-					
+					book.setUserId(rs.getString("userId"));
 					booklists.add(book);
 				}while(rs.next());
 			}
@@ -125,7 +171,8 @@ public class bookListDAO {
 					"`BookList`.`bookCount`," + 
 					"`BookList`.`createAt`," + 
 					"`BookList`.`updateAt`,"+ 
-					"`BookList`.`status`" + 
+					"`BookList`.`status`," +
+					"`BookList`.`userId`" +
 				"FROM `DB_sem`.`BookList` order by bookName desc";
 		try {
 			conn = db.getConnection();
@@ -142,6 +189,7 @@ public class bookListDAO {
 				book.setCreateAt(rs.getString("createAt"));
 				book.setUpdateAt(rs.getString("updateAt"));
 				book.setStatus(rs.getString("status"));
+				book.setUserId(rs.getString("userId"));
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -151,6 +199,63 @@ public class bookListDAO {
 			if(rs != null) try{rs.close();}catch(SQLException ex){}
 		}
 		return book;
+	}
+	
+	public int checkOut(int bookId, String status, String userId) {
+		int x = -1;
+		String query = 
+				"UPDATE `DB_sem`.`BookList`" + 
+				"SET" + 
+				"`bookCount` = `bookCount` - 1," + 
+				"`status` = ?," +
+				"`userId` = ?" +
+				"WHERE `bookId` = ?";
+		
+		try {
+			conn = db.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, status);
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, bookId);
+			
+			pstmt.executeUpdate();
+			x = 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
+		}
+		return x;
+	}
+	
+	public int cancel(int bookId, String status) {
+		int x = -1;
+		String query = 
+				"UPDATE `DB_sem`.`BookList`" + 
+				"SET" + 
+				"`bookCount` = `bookCount` + 1," + 
+				"`status` = ?," +
+				"`userId` = ''" +
+				"WHERE `bookId` = ?";
+		
+		try {
+			conn = db.getConnection();
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, status);
+			pstmt.setInt(2, bookId);
+			
+			pstmt.executeUpdate();
+			x = 1;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally{
+			if(conn != null) try{conn.close();}catch(SQLException ex){}
+			if(pstmt != null) try{pstmt.close();}catch(SQLException ex){}
+			if(rs != null) try{rs.close();}catch(SQLException ex){}
+		}
+		return x;
 	}
 	
 	public int deleteBook(int bookId) {
@@ -172,4 +277,6 @@ public class bookListDAO {
 		}
 		return x;
 	}
+	
+	
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ public class PostModifyCommand implements PostCommand{
 	@Override
 	public int execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 		HttpSession session = request.getSession();
 		String boardId = (String) session.getAttribute("boardId");
 		String title = (String) session.getAttribute("title");

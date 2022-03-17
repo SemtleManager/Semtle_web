@@ -103,6 +103,8 @@ public class UserController extends HttpServlet {
 				title = "정보 수정";
 				session.setAttribute("title", title);
 			}else if(commandName.equals("/userInfo.do")) {
+				command = new infoCntCommand();
+				command.execute(request, response);
 				viewPage = "/semtle/User/mypage.jsp";
 				title = "내 정보";
 				session.setAttribute("title", title);
@@ -110,6 +112,18 @@ public class UserController extends HttpServlet {
 				viewPage = "/semtle/User/mypage_info.jsp";
 				title = "정보 수정";
 				session.setAttribute("title", title);
+			}else if(commandName.equals("/infoBook.do")) {
+				title = "대여 목록";
+				session.setAttribute("title", title);
+				command = new infoBookCommand();
+				command.execute(request, response);
+				viewPage = "/semtle/User/infoBook.jsp";
+			}else if(commandName.equals("/infoPost.do")) {
+				title = "내가 쓴 글";
+				session.setAttribute("title", title);
+				command = new infoPostCommand();
+				command.execute(request, response);
+				viewPage = "/semtle/User/infoPost.jsp";
 			}
 			else if(commandName.equals("/login_form.do")){
 				viewPage = "/semtle/User/login.jsp";

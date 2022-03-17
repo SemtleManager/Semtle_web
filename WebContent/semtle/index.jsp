@@ -79,7 +79,7 @@
           <i class="fas fa-angle-down"></i>
         </div>
         <div class="notice-content" id="thisone">
-          <p>안녕하세요. 셈틀쟁이입니다. 환영해요!! 셈-하!!</p>
+          <p>셈틀쟁이는 컴퓨터정보공학부 학회로써 학회원들에게 스터디와 여러 활동 (엠티, 개강파티, 종강파티)를 하는 컴퓨터정보공학을 1전공, 2전공 하시는 분이라면 모두 가입가능한 학회입니다 :)</p>
         </div>
       </div>
 
@@ -89,7 +89,7 @@
           <i class="fas fa-angle-down"></i>
         </div>
         <div class="notice-content">
-          <p>가입 문자 전화 디엠 주세요 ㅋㅋ</p>
+          <p>회원가입 하시면 관리자 승인에 의해 활동을 하실 수 있습니다~~</p>
         </div>
       </div>
     </section>

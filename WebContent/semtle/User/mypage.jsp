@@ -9,6 +9,16 @@
 	<link rel="icon" href="${pageContext.request.contextPath}/semtle/images/favicon.ico" type="image/x-icon" sizes="16X16">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemtleWeb</title>
+    <script language="javascript">
+    function btn_click(str) {
+		if(str=="book") {
+			info.action="infoBook.do";
+		} else if(str=="post") {
+			info.action="infoPost.do";
+		}
+		
+	}
+    </script>
   </head>
 
   <body>
@@ -18,7 +28,7 @@
       <div class="mypage-heading-left"></div>
       <div class="mypage-heading-info">
         <img src="images/char.PNG" alt="" />
-        <span>김대현</span>
+        <span>${ userInfo.userName }</span>
         <span style="font-size: 13px;">${ userInfo.grade }학년</span>
       </div>
       <a href="logout.do">
@@ -31,19 +41,22 @@
     <section class="mypage-box">
       <div class="mypage-box-content">
         <span class="content-head">내가 쓴 글</span>
-        <span>3</span>
+        <span>${ postCnt }</span>
       </div>
       <div class="mypage-box-content mypageboxborder">
-        <span class="content-head">내가 쓴 글</span>
-        <span>3</span>
+        <span class="content-head">내가 쓴 댓글</span>
+        <span>${ commentCnt }</span>
       </div>
       <div class="mypage-box-content">
-        <span class="content-head">내가 쓴 글</span>
-        <span>3</span>
+        <span class="content-head">내가 대여한 책</span>
+        <span>${ bookCnt }</span>
       </div>
     </section>
 
     <section class="mypage-content">
+    <form id="info" name="info" method="post">
+    	<input type="hidden" name="userId" value="${ userInfo.userId }">
+    </form>
     <a href="userUpdate.do">
       <div class="mypage-content-icon">
         <div class="mypage-content-icon-left">
@@ -55,7 +68,8 @@
         </div>
       </div>
       </a>
-      <div class="mypage-content-icon">
+      <a href="infoBook.do?userId=${ userInfo.userId }">
+      <div class="mypage-content-icon" onclick="btn_click('book');">
         <div class="mypage-content-icon-left">
           <i class="fas fa-book"></i>
           <span>대여한 책</span>
@@ -64,7 +78,9 @@
           <i class="fas fa-angle-right"></i>
         </div>
       </div>
-      <div class="mypage-content-icon">
+      </a>
+      <a href="infoPost.do?userId=${ userInfo.userId }">
+      <div class="mypage-content-icon" onclick="btn_click('post');">
         <div class="mypage-content-icon-left">
           <i class="far fa-edit"></i>
           <span>내가 쓴 글</span>
@@ -73,19 +89,9 @@
           <i class="fas fa-angle-right"></i>
         </div>
       </div>
-      <div class="mypage-content-icon">
-        <div class="mypage-content-icon-left">
-          <i class="fas fa-comment"></i>
-          <span>내가 쓴 댓글</span>
-        </div>
-        <div class="mypage-content-icon-right">
-          <i class="fas fa-angle-right"></i>
-        </div>
-      </div>
+      </a>
     </section>
 
 	<jsp:include page="${pageContext.request.contextPath}/semtle/footer.jsp" flush="true" />
   </body>
-  <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
-  <script src="js/script.js" defer></script>
 </html>

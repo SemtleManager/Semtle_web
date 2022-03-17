@@ -1,6 +1,8 @@
 package com.Book;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +17,8 @@ import com.Study.StudyCommand;
  */
 @WebServlet("*.doBook")
 public class BookController extends HttpServlet {
-	BookCommand command = null;
+	private BookCommand command;
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -43,9 +46,10 @@ public class BookController extends HttpServlet {
 		System.out.println("doGet");
 		doAction(request, response);
 	}
-	private synchronized void setCommand(BookCommand command) {
+	public void setCommand(BookCommand command) {
 		this.command = command;
 	}
+	
 	private synchronized void doAction(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("do PostController");
 		HttpSession session = request.getSession();
@@ -60,11 +64,35 @@ public class BookController extends HttpServlet {
 		String commandName =  null;
 		viewPage = requestUri;
 		commandName = viewPage.substring(contextPath.length());
+		
+		title = (String) session.getAttribute("title");
 		try {
-			if(commandName.equals("bookImage.doBook")) {
-				setCommand(new BookListCommand());
-				command.execute(request, response);
+			if(commandName.equals("/booklist.doBook")) {
+				viewPage = "/semtle/Bookboard/book.jsp";
+				title = "책 대여";
+				session.setAttribute("title", title);
 			}
+			else if(commandName.equals("/checkout.doBook")) {
+				viewPage = "/semtle/Bookboard/book.jsp";
+				setCommand(new bookCheckoutCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/cancel.doBook")) {
+				viewPage = "/semtle/Bookboard/book.jsp";
+				setCommand(new BookCancelCommand());
+				command.execute(request, response);
+			}else if(commandName.equals("/searchBook.doBook")) {
+				viewPage = "/semtle/Bookboard/book.jsp";
+				title = "책 대여";
+				session.setAttribute("title", title);
+				setCommand(new BookSearchCommand());
+				command.execute(request, response);
+			}else {
+				System.out.println("해당 Command가 없습니다.");
+				viewPage = "notCommand.jsp";
+			}
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
+			dispatcher.forward(request, response);
 		}catch(IllegalStateException e) {
 			System.out.println("Illegal");
 		}

@@ -34,7 +34,7 @@
 	     <a href="board_list_Notice.doNotice">공지사항</a>
 	     <a href="board_list_Free.doPost">자유게시판</a>
 	     <a href="Study.doStudy">스터디룸</a>
-	     <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
+	     <a href="booklist.doBook">책 대여</a>
 	     <a href="#">공모전(아직 준비중입니다)</a>
 	   </nav>
 	   
@@ -44,7 +44,7 @@
 	        	<a href="login_form.do"><i class="fas fa-user" id="sm-login"></i></a>
 	        </c:when>
 	        <c:otherwise>
-	      		<a href="userInfo.do"><i class="fas fa-user" id="sm-login"></i></a>
+	      		<a href="userInfo.do?userId=${ userInfo.userId }"><i class="fas fa-user" id="sm-login"></i></a>
 	 		</c:otherwise>
 	 		</c:choose>
 	        <i class="fas fa-bars header-menu" id="menu-bars"></i>
@@ -60,7 +60,7 @@
      <a href="board_list_Notice.doNotice">공지사항</a>
      <a href="board_list_Free.doPost">자유게시판</a>
      <a href="Study.doStudy">스터디룸</a>
-     <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
+     <a href="booklist.doBook">책 대여</a>
      <a href="#">공모전(아직 준비중입니다)</a>
     </nav>
 
@@ -72,7 +72,7 @@
      <a href="board_list_Notice.doNotice">공지사항</a>
      <a href="board_list_Free.doPost">자유게시판</a>
      <a href="Study.doStudy">스터디룸</a>
-     <a href="${pageContext.request.contextPath}/semtle/Bookboard/book.jsp?title=책대여">책 대여</a>
+     <a href="booklist.doBook">책 대여</a>
       <a href="#">공모전(아직 준비중입니다)</a>
     </nav>
 

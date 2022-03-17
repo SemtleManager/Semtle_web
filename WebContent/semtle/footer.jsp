@@ -12,12 +12,12 @@
     <footer class="footer">
       <div class="footer-box">
         <div class="footer-content">
-          셈틀쟁이 : 가톨릭대 성심교정 다솔관 D410
+          셈틀쟁이 : 가톨릭대 성심교정 다솔관 D408
         </div>
         <div class="footer-content">회장 김대현 010-3249-7669</div>
         <div class="footer-content">
-          <i class="fab fa-facebook"></i>
-          <i class="fab fa-instagram"></i>
+          <i class="fab fa-facebook"><a href="https://www.instagram.com/cuk_semtle/"></a></i>
+          <i class="fab fa-instagram"><a href="https://www.facebook.com/semtle.cuk"></a></i>
         </div>
       </div>
     </footer>

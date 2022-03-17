@@ -9,6 +9,7 @@ public class bookListDTO {
 	private String createAt;
 	private String updateAt;
 	private String status;
+	private String userId;
 	
 	public String getStatus() {
 		return status;
@@ -57,5 +58,11 @@ public class bookListDTO {
 	}
 	public void setBookCount(int bookCount) {
 		this.bookCount = bookCount;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

@@ -21,6 +21,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemtleWeb</title>
+    <script language="javascript">
+   function btn_click() {
+	document.getElementById("bookSearch").submit();
+	
+	}
+    
+    </script>
   </head>
 
 <body>
@@ -30,9 +37,14 @@
         <div class="swiper-wrapper book-wrapper">
         <c:forEach items="${ list }" var="dto" varStatus="i">
           <div class="swiper-slide slide">
+          <a href="searchBook.doBook?bookName=${ dto.bookName }">
             <div class="image">
               <img src="${pageContext.request.contextPath}/bookIMG/${ dto.bookImage }" alt="" />
             </div>
+          </a>
+          <form action="searchBook.doBook" id="bookSearch" method="post">
+          <input type="hidden" name="bookName" value="${ dto.bookName }">
+          </form>
             <div class="content">
             <h3>${ dto.bookImage }</h3>
               <h3>${ dto.bookName }</h3>

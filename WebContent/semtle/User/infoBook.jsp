@@ -31,23 +31,10 @@
 
     <section class="heading">
       <div class="heading-box">
-        <span>printf("책 대여하세용~!")</span>
+        <span>printf("책 대여 목록 확인하세요 ~~")</span>
       </div>
     </section>
 
-    <section class="bookboard talkboard">
-      <div class="bookboard-head talkboard-head">
-        <form action="searchBook.doBook" class="booksearch_form" id="bookSearch" method="post">
-          <input
-            type="text"
-            name="bookName"
-            placeholder="책 제목을 입력해주세요"
-            class="booksearch"
-          />
-          <i class="fas fa-search" onclick='btn_click();'></i>
-        </form>
-      </div>
-    </section>
 	<c:choose>
 	<c:when test="${ not empty list }">
 	    <div class="takeoutbox-head">
@@ -99,11 +86,7 @@
 			        <div class="takeoutbox-btn">
 			        <c:choose>
 			        <c:when test="${ userInfo.userId eq dto.userId }">
-			        	
 						<button class="takeout_btn" onclick='cancel_btn(${ i.index });'>반납하기</button>			          
-			        </c:when>
-			        <c:when test="${ dto.bookCount != 0 }">
-			          <button class="takeout_btn" onclick='checkout_btn(${ i.index });'>대출하기</button>
 			        </c:when>
 			        </c:choose>
 			        </div>
@@ -114,12 +97,6 @@
 	    </c:forEach>
 	</c:when>
 	</c:choose>
-    <div class="takeoutbox-head">
-      <span>책 목록</span>
-    </div>
-    <div class="book">
-      <jsp:include page="${pageContext.request.contextPath}/semtle/booker.jsp" flush="true" />
-	</div>
     <jsp:include page="${pageContext.request.contextPath}/semtle/footer.jsp" flush="true" />
   </body>
 </html>
