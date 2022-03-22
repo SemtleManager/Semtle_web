@@ -28,7 +28,7 @@ public class UserSignupCommand implements UserCommand{
 		String userRole = "셈틀회원";
 		String createAt = sdf.format(new Timestamp(System.currentTimeMillis()));
 		String updateAt = sdf.format(new Timestamp(System.currentTimeMillis()));
-		String status = "0";
+		String status = "1";
 		userDAO dao = userDAO.getInstance();
 		dao.signUp(grade, nickName, userCode, userName, userId, userPassword, userEmail, userPhone, userRole, createAt, updateAt, status);
 		

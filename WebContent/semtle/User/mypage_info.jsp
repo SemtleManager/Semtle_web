@@ -108,15 +108,30 @@
 		          />
 		        </div>
 		        
-		        <div class="join_input">
-          		  <label for="pw">비밀번호</label>
-		          <input
-		            type="password"
-		            id="pw"
-		            name="userPassword"
-		            placeholder="비밀번호를 입력해주세요"
-		          />
-		        </div>
+		        <c:choose>
+		        	<c:when test="${ value eq 'kakao' }">
+			        	<input
+			            type="hidden"
+			            id="pw"
+			            name="value"
+			            value="kakao"
+			          />
+		        	</c:when>
+		        	
+		        	<c:otherwise>
+		        		<div class="join_input">
+		          		  <label for="pw">비밀번호</label>
+				          <input
+				            type="password"
+				            id="pw"
+				            name="userPassword"
+				            placeholder="카카오 로그인시 작성 X"
+				          />
+				        </div>
+		        	</c:otherwise>	
+		        </c:choose>
+		        
+		        
 		
 		        <div class="join_input join_btnbox">
 		          <button type="submit" class="join_btn">수정하기</button>

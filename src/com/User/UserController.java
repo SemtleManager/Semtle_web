@@ -136,6 +136,13 @@ public class UserController extends HttpServlet {
 			}else if(commandName.equals("/logout.do")) {
 				command = new UserLogoutCommand();
 				command.execute(request, response);
+			}else if(commandName.equals("/kakao_login.do")) {
+				viewPage = "/semtle/index.jsp";
+				command = new kakaoLoginCommand();
+				command.execute(request, response);
+				title = null;
+				session.setAttribute("title", title);
+				
 			}else {
 				System.out.println("해당 Command가 없습니다.");
 				viewPage = "notCommand.jsp";

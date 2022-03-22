@@ -58,7 +58,10 @@
 				<div class="btnform">
 					<input type="submit" class="login_btn" value="로그인"> </input>
 				</div>
-
+				<div class="btnform">
+					<div class="kakao" style="text-align: center;"><a href="https://kauth.kakao.com/oauth/authorize?client_id=fdc70f02ba29ec48e4832add2c0099c5&redirect_uri=http://www.semtle-cuk.site/kakao_login.do&response_type=code"><img src="${pageContext.request.contextPath}/semtle/images/kakao_login_medium_wide.png"></a></div>
+				</div>
+				
 				<div class="appendform">
 					<div class="loginkeep">
 						<label><input type="checkbox"

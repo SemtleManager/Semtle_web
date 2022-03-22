@@ -18,7 +18,7 @@ public class UserModifyCommand implements UserCommand{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
 		sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 		HttpSession session = request.getSession();
-		
+		String value = request.getParameter("value");
 		int grade = Integer.parseInt(request.getParameter("grade"));
 		String nickName = request.getParameter("nickName");
 		int userCode = Integer.parseInt(request.getParameter("userCode"));
@@ -33,6 +33,12 @@ public class UserModifyCommand implements UserCommand{
 		userDAO dao = userDAO.getInstance();
 		PrintWriter writer = response.getWriter();
 		
+		if(value.equals("kakao")) {
+			userDTO dto =  (userDTO) session.getAttribute("userInfo");
+			userPassword = dto.getUserEmail();
+			System.out.println("userPassword = " + userPassword);
+			
+		}
 		
 		
 		if(dao.login(userId, userPassword) == 1) {
