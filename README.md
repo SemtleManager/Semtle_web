@@ -5,15 +5,17 @@ www.semtle-cuk.site    [컴퓨터정보공학부 학회 셈틀쟁이 공식 홈�
 
 22년도 학회장을 맡게되면서 카톡방으로만 모든 행사, 책대여, 스터디진행이되었습니다.
 이에 불편함을 느껴 회장을 맡으면서 간단하게 MVC2 Pattern으로 개발을 하였습니다. 
-
+<br/>
+<br/>
+<개발 환경>
 개발 툴 : Eclipse<br/>
 자바 1.8<br/>
 apache Tomcat 9<br/>
 Mysql<br/>
 AWS EC2 (CentOS7)<br/>
 Jstl
-<br/>
-사용 기술
+<br/><br/>
+<사용 기술>
 1. 파일전송 (multipart/form-data)
 2. 싱글톤 패턴
 3. 커맨드 패턴
