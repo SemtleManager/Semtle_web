@@ -1,5 +1,5 @@
 # Semtle_web
-www.semtle-cuk.site    [컴퓨터정보공학부 학회 셈틀쟁이 공식 홈페이지]
+http://semtle.catholic.ac.kr [컴퓨터정보공학부 학회 셈틀쟁이 공식 홈페이지]
 
 가톨릭대학교 컴퓨터정보공학부 22년도 [학회장] 직책 수행
 
