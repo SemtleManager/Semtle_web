@@ -12,7 +12,8 @@ http://semtle.catholic.ac.kr [컴퓨터정보공학부 학회 셈틀쟁이 공�
 자바 1.8<br/>
 apache Tomcat 9<br/>
 Mysql<br/>
-AWS EC2 (CentOS7)<br/>
+~~AWS EC2 (CentOS7)~~<br/>
+Ubuntu 18.04<br/>
 Jstl
 <br/><br/>
 <사용 기술>
